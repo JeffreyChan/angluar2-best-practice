@@ -8,6 +8,7 @@ import { Configuration } from './app.constants';
 import { routing } from './app.routes';
 
 import { CustomerModule } from './customer/customer.module';
+import { PersonModule } from './person/person.module';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -21,17 +22,15 @@ import { TestDataService } from './services/testDataService';
     imports: [
         BrowserModule,
         CommonModule,
-        FormsModule,
-        ReactiveFormsModule,
         routing,
         HttpModule,
-        CustomerModule
+        CustomerModule,
+        PersonModule
     ],
     declarations: [
         AppComponent,
         AboutComponent,
-        HomeComponent,
-        PersonComponent
+        HomeComponent
     ],
     providers: [
         TestDataService,

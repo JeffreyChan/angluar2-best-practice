@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { CustomerComponent } from './customer.component';
-import { AddressComponent } from './address.component';
+import { PersonComponent } from './person.component';
 
 import { FormControlService } from '.././services/form-control.service'
 
@@ -15,10 +14,9 @@ import { FormControlService } from '.././services/form-control.service'
         RouterModule
     ],
     declarations: [
-        CustomerComponent,
-        AddressComponent
+        PersonComponent
     ],
     providers: [FormControlService],
-    exports: [CustomerComponent],
+    exports: [PersonComponent],
 })
-export class CustomerModule { }
+export class PersonModule { }

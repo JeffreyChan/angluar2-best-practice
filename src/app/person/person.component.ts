@@ -4,6 +4,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { Person } from '../model/person.model';
 
+import { FormControlService } from '.././services/form-control.service'
+
 @Component({
     selector: 'person-component',
     templateUrl: 'person.component.html'
@@ -17,7 +19,7 @@ export class PersonComponent implements OnInit {
 
     submitted = false;
 
-    constructor(private fb: FormBuilder) {
+    constructor(private fb: FormBuilder, private _formService: FormControlService) {
 
     }
 
@@ -43,33 +45,31 @@ export class PersonComponent implements OnInit {
 
         this.personForm.valueChanges
             .subscribe(data => this.onValueChanged(data));
-
-        this.onValueChanged(); // (re)set validation messages now
     }
 
     onValueChanged(data?: any) {
         if (!this.person) { return; }
-        const form = this.personForm;
-
-        for (const field in this.formErrors) {
-            // clear previous error message (if any)
-            this.formErrors[field] = '';
-            const control = form.get(field);
-
-            if (control && control.dirty && !control.valid) {
-                const messages = this.validationMessages[field];
-                for (const key in control.errors) {
-                    this.formErrors[field] += messages[key] + ' ';
-                }
-            }
-        }
+        // handle main form errors
+        this.onFormValueChanged();
     }
 
-    formErrors: any = {
-        'name': '',
-        'email': '',
-        'age': ''
-    };
+    /* Update Main Form Validations */
+    onFormValueChanged() {
+
+        const personF = this.personForm;
+
+        // setup fields to validate and the messages
+        const fields = {
+            'name': '',
+            'email': '',
+            'age': ''
+        };
+
+        const refErrors = this._formService.handleValidations(fields, this.validationMessages, personF);
+        this.formErrors = Object.assign(this.formErrors, refErrors);
+    }
+
+    formErrors: any = {};
 
     validationMessages: any = {
         'name': {

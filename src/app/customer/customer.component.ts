@@ -4,6 +4,8 @@ import { Customer } from '../model/customer.model';
 
 /*import './customer.component.scss';*/
 
+import { FormControlService } from '.././services/form-control.service'
+
 @Component({
     selector: 'customer-component',
     templateUrl: 'customer.component.html',
@@ -11,7 +13,31 @@ import { Customer } from '../model/customer.model';
 export class CustomerComponent implements OnInit {
     public customerForm: FormGroup;
 
-    constructor(private _fb: FormBuilder) { }
+    constructor(private _fb: FormBuilder, private _formService: FormControlService) { }
+
+    initAddress() {
+        return this._fb.group({
+            'street': ['', Validators.required],
+            'postcode': ['']
+        });
+    }
+
+    addAddress() {
+        const control = this.customerForm.get('addresses') as FormArray;
+        const addrCtrl = this.initAddress();
+
+        control.push(addrCtrl);
+
+    }
+
+    removeAddress(i: number) {
+        const control = this.customerForm.get('addresses') as FormArray;
+        control.removeAt(i);
+    }
+
+    onSubmit() {
+
+    }
 
     ngOnInit() {
         this.customerForm = this._fb.group({
@@ -25,37 +51,13 @@ export class CustomerComponent implements OnInit {
         this.customerForm.valueChanges
             .subscribe(data => this.onValueChanged(data));
 
-       /* // HACK: trigger value changes immediately
-        this.customerForm.setValue({
-            name: '',
-            addresses: [
-                { street: '', postcode: '' }
-            ]
-        });*/
-    }
-
-    initAddress() {
-        return this._fb.group({
-            'street': ['', Validators.required],
-            'postcode': ['']
-        });
-    }
-
-    addAddress() {
-        const control = <FormArray>this.customerForm.controls['addresses'];
-        const addrCtrl = this.initAddress();
-
-        control.push(addrCtrl);
-
-    }
-
-    removeAddress(i: number) {
-        const control = <FormArray>this.customerForm.controls['addresses'];
-        control.removeAt(i);
-    }
-
-    onSubmit() {
-
+        /* // HACK: trigger value changes immediately
+         this.customerForm.setValue({
+             name: '',
+             addresses: [
+                 { street: '', postcode: '' }
+             ]
+         });*/
     }
 
     onValueChanged(data?: any) {
@@ -76,7 +78,7 @@ export class CustomerComponent implements OnInit {
         // setup fields to validate and the messages
         const fields = { name: '' };
 
-        const refErrors = this.handleValidations(fields, custF);
+        const refErrors = this._formService.handleValidations(fields, this.validationMessages, custF);
         this.formErrors = Object.assign(this.formErrors, refErrors);
     }
 
@@ -88,27 +90,12 @@ export class CustomerComponent implements OnInit {
         const fields = { street: '' };
 
         addrsF.controls.forEach((val, idx) => {
-            const refErrors = this.handleValidations(fields, addrsF.get(idx.toString()) as FormGroup);
+            const refErrors = this._formService.handleValidations(fields,
+                this.validationMessages,
+                addrsF.get(idx.toString()) as FormGroup);
+
             this.addressErrors = Object.assign(this.addressErrors, { [idx]: refErrors });
         });
-    }
-
-    handleValidations(fs: any, fg: FormGroup) {
-        // avoid mutation
-        const fields = Object.assign({}, fs);
-
-        for (const field in fields) {
-            const control = fg.get(field);
-
-            if (control && !control.valid) {
-                const messages = this.validationMessages[field];
-                for (const key in control.errors) {
-                    fields[field] += messages[key] + ' ';
-                }
-            }
-        }
-
-        return fields;
     }
 
     formErrors: any = {
