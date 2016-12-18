@@ -7,6 +7,8 @@ import { HttpModule } from '@angular/http';
 import { Configuration } from './app.constants';
 import { routing } from './app.routes';
 
+import { CustomerModule } from './customer/customer.module';
+
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
@@ -22,7 +24,8 @@ import { TestDataService } from './services/testDataService';
         FormsModule,
         ReactiveFormsModule,
         routing,
-        HttpModule
+        HttpModule,
+        CustomerModule
     ],
     declarations: [
         AppComponent,
