@@ -40,6 +40,10 @@ export class CustomerComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.buildForm();
+    }
+
+    buildForm(): void {
         this.customerForm = this._fb.group({
             'name': ['', [Validators.required, Validators.minLength(5)]],
             'addresses': this._fb.array([])
