@@ -9,12 +9,11 @@ import { routing } from './app.routes';
 
 import { CustomerModule } from './customer/customer.module';
 import { PersonModule } from './person/person.module';
+import { PaymentModule } from './payment/payment.module';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
-
-import { PersonComponent } from './person/person.component';
 
 import { TestDataService } from './services/testDataService';
 
@@ -25,7 +24,8 @@ import { TestDataService } from './services/testDataService';
         routing,
         HttpModule,
         CustomerModule,
-        PersonModule
+        PersonModule,
+        PaymentModule
     ],
     declarations: [
         AppComponent,
