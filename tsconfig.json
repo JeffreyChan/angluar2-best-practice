@@ -17,10 +17,10 @@
       "node"
     ]
   },
-  "files": [
+/*  "files": [
     "src/components/app/app.module.ts",
     "src/bootstrap.ts"
-  ],
+  ],*/
   "awesomeTypescriptLoaderOptions": {
     "useWebpackText": true
   },

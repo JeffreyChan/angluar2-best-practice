@@ -1,0 +1,96 @@
+<h1>
+    Payment Dynamic Conditional Validation Form Reactive</h1>
+<form [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="name">Name</label>
+
+        <input type="text" id="name" class="form-control" formControlName="name">
+
+        <div *ngIf="formErrors.name" class="alert alert-danger">
+            {{ formErrors.name }}
+        </div>
+
+    </div>
+
+    <div formGroupName="paymentMethod">
+
+        <div class="row">
+            <div class="col-xs-6">
+                <button type="button" (click)="setPaymentMethodType(PAYMENT_METHOD_TYPE.BANK)" class="btn btn-block text-capitalize" [class.btn-default]="PaymentType !== PAYMENT_METHOD_TYPE.BANK"
+                    [class.btn-primary]="PaymentType === PAYMENT_METHOD_TYPE.BANK">
+                {{ PAYMENT_METHOD_TYPE.BANK }}
+              </button>
+            </div>
+            <div class="col-xs-6">
+                <button type="button" (click)="setPaymentMethodType(PAYMENT_METHOD_TYPE.CARD)" class="btn btn-block text-capitalize" [class.btn-default]="PaymentType !== PAYMENT_METHOD_TYPE.CARD"
+                    [class.btn-primary]="PaymentType === PAYMENT_METHOD_TYPE.CARD">
+                {{ PAYMENT_METHOD_TYPE.CARD }}
+              </button>
+            </div>
+        </div>
+
+        <div class="panel panel-default margin-20" *ngIf="PaymentType === PAYMENT_METHOD_TYPE.BANK">
+            <div class="panel-body" formGroupName="bankInfo">
+                <div class="form-group col-xs-8">
+                    <label>Account no.</label>
+                    <input type="text" class="form-control" formControlName="accountNo">
+                    <small *ngIf="bankInfoErrors.accountNo" class="text-danger">
+                  {{bankInfoErrors.accountNo}}
+                </small>
+                </div>
+                <div class="form-group col-xs-4">
+                    <label>Routing no.</label>
+                    <input type="text" class="form-control" formControlName="routingNo">
+                    <small *ngIf="bankInfoErrors.routingNo" class="text-danger">
+                 {{bankInfoErrors.routingNo}}
+                </small>
+                </div>
+                <div class="form-group col-xs-12">
+                    <label>Name</label>
+                    <input type="text" class="form-control" formControlName="accountHolder">
+                    <small *ngIf="bankInfoErrors.accountHolder" class="text-danger">
+                        {{bankInfoErrors.accountHolder}}
+                </small>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default margin-20" *ngIf="PaymentType === PAYMENT_METHOD_TYPE.CARD">
+            <div class="panel-body" formGroupName="cardInfo">
+                <div class="form-group col-xs-8">
+                    <label>Card no.</label>
+                    <input type="text" class="form-control" formControlName="cardNo">
+                    <small *ngIf="cardInfoErrors.cardNo" class="text-danger">
+                {{cardInfoErrors.cardNo}}
+                </small>
+                </div>
+                <div class="form-group col-xs-4">
+                    <label>Expiry</label>
+                    <input type="text" formControlName="expiry" placeholder="MM/YY" class="form-control">
+                    <small *ngIf="cardInfoErrors.expiry" class="text-danger">
+                 {{cardInfoErrors.expiry}}
+                </small>
+                </div>
+                <div class="form-group col-xs-12">
+                    <label>Name</label>
+                    <input type="text" class="form-control" formControlName="cardHolder">
+                    <small *ngIf="cardInfoErrors.cardHolder" class="text-danger">
+                 {{cardInfoErrors.cardHolder}}
+                </small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="margin-20">
+        <button type="submit" class="btn btn-primary pull-right" [disabled]="!paymentForm.valid">Submit</button>
+    </div>
+    <div class="clearfix"></div>
+
+
+    <div class="margin-20">
+        <div>myForm details:-</div>
+        <pre>Is myForm valid?: <br>{{paymentForm.valid | json}}</pre>
+        <pre>form value: <br>{{paymentForm.value | json}}</pre>
+    </div>
+</form>
