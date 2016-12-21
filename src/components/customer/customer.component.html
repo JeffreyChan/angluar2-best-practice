@@ -14,10 +14,10 @@
 
     <!--addresses-->
     <div formArrayName="addresses">
-        <div *ngFor="let address of customerForm.controls.addresses.controls; let i=index" class="panel panel-default">
+        <div *ngFor="let address of addressesFormArray.controls; let i=index" class="panel panel-default">
             <div class="panel-heading">
                 <span>Address {{i + 1}}</span>
-                <span class="glyphicon glyphicon-remove pull-right" *ngIf="customerForm.controls.addresses.controls.length > 1" (click)="removeAddress(i)"></span>
+                <span class="glyphicon glyphicon-remove pull-right" *ngIf="addressesFormArray.controls.length > 1" (click)="removeAddress(i)"></span>
             </div>
             <div class="panel-body" [formGroupName]="i">
                 <address [group]="address" [addressError] = "addressErrors[i]"></address>

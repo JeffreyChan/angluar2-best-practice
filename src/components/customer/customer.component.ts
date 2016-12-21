@@ -13,6 +13,7 @@ import { FormControlService } from '../../services/form-control.service'
 export class CustomerComponent implements OnInit {
     public customerForm: FormGroup;
 
+    public addressesFormArray:FormArray;
     constructor(private _fb: FormBuilder, private _formService: FormControlService) { }
 
     initAddress() {
@@ -41,6 +42,7 @@ export class CustomerComponent implements OnInit {
 
     ngOnInit() {
         this.buildForm();
+        this.addressesFormArray = this.customerForm.get('addresses') as FormArray;
     }
 
     buildForm(): void {
