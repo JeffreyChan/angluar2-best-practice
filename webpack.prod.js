@@ -11,7 +11,7 @@ console.log("@@@@@@@@@ USING PRODUCTION @@@@@@@@@@@@@@@");
 module.exports = {
 
     entry: {
-        'app': './src/main-aot.ts' // AoT compilation
+        'app': './src/bootstrap-aot.ts' // AoT compilation
     },
 
     output: {
@@ -87,7 +87,7 @@ module.exports = {
         }),
 
         new CopyWebpackPlugin([
-            { from: './src/images/*.*', to: "assets/", flatten: true }
+            { from: './static/images/*.*', to: "assets/", flatten: true }
         ])
     ]
 };

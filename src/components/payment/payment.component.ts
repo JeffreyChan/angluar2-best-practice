@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, Validators, FormControl } from '@angular/forms';
 
-import { Payment, CardInfo, BankInfo } from '../model/payment.model';
+import { Payment, CardInfo, BankInfo } from '../../model/payment.model';
 
 /*import './customer.component.scss';*/
 
-import { FormControlService } from '.././services/form-control.service'
+import { FormControlService } from '../../services/form-control.service'
 
 @Component({
     selector: 'payment-component',
@@ -24,6 +24,10 @@ export class PaymentComponent implements OnInit {
     public PaymentType: string;
 
     constructor(private _fb: FormBuilder, private _formService: FormControlService) {
+    }
+
+    onSubmit() {
+
     }
 
     ngOnInit() {

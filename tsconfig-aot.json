@@ -16,8 +16,8 @@
     ]
   },
   "files": [
-    "src/app/app.module.ts",
-    "src/main-aot.ts"
+    "src/components/app/app.module.ts",
+    "src/bootstrap-aot.ts"
   ],
   "angularCompilerOptions": {
     "genDir": "aot",

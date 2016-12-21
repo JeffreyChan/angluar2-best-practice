@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { Person } from '../model/person.model';
+import { Person } from '../../model/person.model';
 
-import { FormControlService } from '.././services/form-control.service'
+import { FormControlService } from '../../services/form-control.service'
 
 @Component({
     selector: 'person-component',

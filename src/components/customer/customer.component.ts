@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
-import { Customer } from '../model/customer.model';
+import { FormGroup, FormArray, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { Customer } from '../../model/customer.model';
 
 /*import './customer.component.scss';*/
 
-import { FormControlService } from '.././services/form-control.service'
+import { FormControlService } from '../../services/form-control.service'
 
 @Component({
     selector: 'customer-component',

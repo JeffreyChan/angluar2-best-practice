@@ -15,7 +15,7 @@ module.exports = {
         hints: false
     },
     entry: {
-        'app': './src/main.ts' // JiT compilation
+        'app': './src/bootstrap.ts' // JiT compilation
     },
 
     output: {
@@ -83,7 +83,7 @@ module.exports = {
         }),
 
         new CopyWebpackPlugin([
-            { from: './src/images/*.*', to: "assets/", flatten: true }
+            { from: './static/images/*.*', to: "assets/", flatten: true }
         ])
     ]
 

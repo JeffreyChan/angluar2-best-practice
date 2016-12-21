@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { PersonComponent } from './person.component';
+import { PaymentComponent } from './payment.component';
 
-import { FormControlService } from '.././services/form-control.service'
+import { FormControlService } from '../../services/form-control.service'
 
 @NgModule({
     imports: [
@@ -14,9 +14,9 @@ import { FormControlService } from '.././services/form-control.service'
         RouterModule
     ],
     declarations: [
-        PersonComponent
+        PaymentComponent
     ],
     providers: [FormControlService],
-    exports: [PersonComponent],
+    exports: [PaymentComponent],
 })
-export class PersonModule { }
+export class PaymentModule { }

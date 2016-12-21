@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { PaymentComponent } from './payment.component';
+import { CustomerComponent } from './customer.component';
+import { AddressComponent } from './address.component';
 
-import { FormControlService } from '.././services/form-control.service'
+import { FormControlService } from '../../services/form-control.service'
 
 @NgModule({
     imports: [
@@ -14,9 +15,10 @@ import { FormControlService } from '.././services/form-control.service'
         RouterModule
     ],
     declarations: [
-        PaymentComponent
+        CustomerComponent,
+        AddressComponent
     ],
     providers: [FormControlService],
-    exports: [PaymentComponent],
+    exports: [CustomerComponent],
 })
-export class PaymentModule { }
+export class CustomerModule { }
