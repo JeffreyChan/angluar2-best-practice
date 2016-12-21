@@ -5,6 +5,7 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
+var helpers = require('./webpack.helpers');
 
 console.log("@@@@@@@@@ USING PRODUCTION @@@@@@@@@@@@@@@");
 
@@ -65,7 +66,6 @@ module.exports = {
         new CleanWebpackPlugin(
             [
                 './wwwroot/dist',
-                './wwwroot/fonts',
                 './wwwroot/assets'
             ]
         ),
@@ -79,10 +79,15 @@ module.exports = {
             },
             sourceMap: false
         }),
+        new webpack.optimize.CommonsChunkPlugin(
+        {
+            name: ['vendor']
+        }),
 
         new HtmlWebpackPlugin({
             filename: 'index.html',
             inject: 'body',
+            chunksSortMode: helpers.packageSort(['vendor', 'app']),
             template: './src/index.html'
         }),
 
