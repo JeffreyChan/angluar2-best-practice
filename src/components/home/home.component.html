@@ -6,8 +6,19 @@
         <li *ngFor="let user of users">{{user.name}}</li>
     </ul>
 
-    <label>New User name: <input #newUserName /></label>
-    <button (click)="addUser(newUserName.value); newUserName.value=''">Add User</button>
+    <form [formGroup]="userForm" novalidate (ngSubmit)="addUser()">
+        <div class="form-group">
+            <label for="name">Name</label>
 
-    <p class="error" *ngIf="errorMessage">{{errorMessage}}</p>
+            <input type="text" id="userName" class="form-control" formControlName="userName">
+             <em *ngIf="userForm.controls.userName.hasError('required')">Required</em>
+             <em *ngIf="userForm.controls.userName.hasError('usernameTaken')">user name exists</em>
+
+        </div>
+
+       <button type="submit" class="btn btn-primary pull-right" [disabled]="!userForm.valid">Submit</button>
+
+        <p class="error" *ngIf="errorMessage">{{errorMessage}}</p>
+        <pre>{{userForm.controls.userName.errors | json}}</pre>
+    </form>
 </div>

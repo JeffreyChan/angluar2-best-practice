@@ -30,6 +30,8 @@ import { UserData } from '../../model/user-data';
         CommonModule,
         routing,
         HttpModule,
+        FormsModule,
+        ReactiveFormsModule,
         CustomerModule,
         PersonModule,
         PaymentModule,
