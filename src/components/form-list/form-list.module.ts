@@ -7,6 +7,7 @@ import {FormListRoutintg} from './form-list.routes'
 import { FormListComponent } from './form-list.component';
 
 import { PersonComponent } from './person/person.component';
+import { AddressComponent } from './customer/address.component';
 import { CustomerComponent } from './customer/customer.component';
 import { PaymentComponent } from './payment/payment.component';
 
@@ -22,6 +23,7 @@ import { FormControlService } from '../../services/form-control.service'
     declarations: [
         FormListComponent,
         PersonComponent,
+        AddressComponent,
         CustomerComponent,
         PaymentComponent
     ],

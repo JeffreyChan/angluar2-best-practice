@@ -20,7 +20,7 @@
                 <span class="glyphicon glyphicon-remove pull-right" *ngIf="addressesFormArray.controls.length > 1" (click)="removeAddress(i)"></span>
             </div>
             <div class="panel-body" [formGroupName]="i">
-                <address [group]="address" [addressError] = "addressErrors[i]"></address>
+                <inner-address [group]="address" [addressError] = "addressErrors[i]"></inner-address>
             </div>
         </div>
     </div>
