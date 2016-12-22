@@ -21,8 +21,10 @@ export class FormValidatorService {
         return new Observable((obs: any) => {
             control
                 .valueChanges
+                .filter((x: string) => x.length > 2)
                 .debounceTime(400)
-                .flatMap(value => this._userService.getUserByName(value))
+                .distinctUntilChanged()
+                .switchMap(value => this._userService.getUserByName(value))
                 .subscribe(
                 data => {
                     if (Object.keys(data).length === 0) {
