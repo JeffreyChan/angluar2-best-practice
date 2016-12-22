@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Rx';
 import { UserService } from "./user.service";
 
 
-import { User } from '../model/user';
+import { User } from '../model/user.model';
 
 
 

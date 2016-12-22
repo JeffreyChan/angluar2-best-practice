@@ -3,7 +3,7 @@ import { FormGroup, FormArray, FormBuilder, Validators, FormControl } from '@ang
 
 import { UserService } from '../../services/user.service';
 import { FormValidatorService } from '../../services/form-validator.service';
-import { User } from '../../model/user';
+import { User } from '../../model/user.model';
 
 @Component({
     selector: 'home-component',

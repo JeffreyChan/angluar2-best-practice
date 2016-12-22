@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Headers, RequestOptions } from '@angular/http';
 
-import { User } from '../model/user';
+import { User } from '../model/user.model';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
@@ -17,7 +17,13 @@ export class UserService {
             .catch(this.handleError);
     }
 
-    getUserByName(userName:number): Observable<User> {
+    searchUsers(userName: string): Observable<User[]> {
+        return this.http.get(this.usersUrl + `?name=^${userName}`)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    getUserByName(userName: string): Observable<User> {
         return this.http.get(this.usersUrl + `?name=${userName}`)
             .map(this.extractData)
             .catch(this.handleError);

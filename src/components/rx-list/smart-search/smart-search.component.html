@@ -1,0 +1,7 @@
+<div class="panel-group">
+    <h2>Smart Search</h2>
+    <input type="text" class="form-control" [formControl]="userNameCtrl">
+    <ul>
+        <li *ngFor="let item of userList | async">{{item.name}}</li>
+    </ul>
+</div>
