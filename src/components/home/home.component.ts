@@ -1,28 +1,40 @@
 import { Component, OnInit } from '@angular/core';
-import { TestDataService } from '../../services/testDataService';
+
+import { UserService } from '../../services/user.service';
+import { User } from '../../model/user';
 
 @Component({
     selector: 'home-component',
-    templateUrl: 'home.component.html',
-    providers: [TestDataService]
+    templateUrl: 'home.component.html'
 })
 
 export class HomeComponent implements OnInit {
 
-    public message: string;
-    public values: any[];
+    errorMessage: string;
+    public users: User[];
 
-    constructor(private _dataService: TestDataService) {
-        this.message = "Hello from HomeComponent constructor";
+    constructor(private _userService: UserService) {
+
     }
 
     ngOnInit() {
-        this._dataService
-            .GetAll()
+        this.getUsers()
+    }
+
+    getUsers() {
+        this._userService
+            .getUsers()
             .subscribe(
-            data => this.values = data,
-            error => console.log(error),
-            () => console.log('Get all complete')
+            data => this.users = data,
+            error => this.errorMessage = <any>error
             );
+    }
+
+    addUser(name: string) {
+        if (!name) { return; }
+        this._userService.addUser(name)
+            .subscribe(
+            hero => this.users.push(hero),
+            error => this.errorMessage = <any>error);
     }
 }
