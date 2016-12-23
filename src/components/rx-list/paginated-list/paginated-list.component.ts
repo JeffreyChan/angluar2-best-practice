@@ -53,10 +53,7 @@ export class PaginatedListComponent implements OnInit {
     }
 
     buildForm(): void {
-
-
-
-
+        
         this.gitForm = this.fb.group({
             'searchTerm': [''],
             'pageNum': this.pageNumList[0],
@@ -66,25 +63,7 @@ export class PaginatedListComponent implements OnInit {
         this.gitRepStream = this.gitForm.valueChanges
             .debounceTime(1000)
             .distinctUntilChanged()
-            .switchMap((formValue: any) => {
-                const params = {
-                    q: formValue['searchTerm'],
-                    page: formValue['pageNum'],
-                    per_page: formValue['pageSize']
-                };
-
-                console.log(params);
-
-                if (params.q) {
-                    return this._userService.getGitHubRepositories(params)
-                        .catch((res: string) => {
-                            return Observable.of({ items: [], total_count: 0, error: res });
-                        });
-                }
-                else {
-                    return Observable.of({ items: [], total_count: 0 });
-                }
-            })
+            .switchMap(this.mapSearchCondition.bind(this))
             .share();
 
         this.gitRepStream.subscribe(data => {
@@ -96,18 +75,13 @@ export class PaginatedListComponent implements OnInit {
     }
 
     mapSearchCondition(formValue: any): any {
-
-        let that = this;
         const params = {
             q: formValue['searchTerm'],
             page: formValue['pageNum'],
             per_page: formValue['pageSize']
         };
-
-        console.log(params);
-
         if (params.q) {
-            return that._userService.getGitHubRepositories(params)
+            return this._userService.getGitHubRepositories(params)
                 .catch((res: any) => {
                     return Observable.of({ items: [], total_count: 0, error: res.json() });
                 });
