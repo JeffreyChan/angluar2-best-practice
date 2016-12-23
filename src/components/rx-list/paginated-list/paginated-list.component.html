@@ -5,23 +5,39 @@
     </div>
 
     <div class="panel-body">
-        <div class="row">
+        <form [formGroup]="gitForm" (ngSubmit)="onSubmit()">
             <div class="form-group col-xs-6">
-                <label for="email">Search term</label>
+                <label for="searchTerm">Search term</label>
                 <div class="inner-addon right-addon">
                     <i class="glyphicon glyphicon-search"></i>
-                    <input type="text" class="form-control" id="txtSearchTerm" placeholder="Search" />
+                    <input type="text" class="form-control" id="searchTerm" formControlName="searchTerm" />
                 </div>
+                <p *ngIf="errorMessage" class="help-block">
+                    {{ errorMessage }}
+                </p>
             </div>
             <div class="form-group col-xs-3">
-                <label>Page</label>
-                <select class="form-control"></select>
+                <label>Page Number</label>
+                <select formControlName="pageNum" class="form-control">
+			        <option *ngFor="let pgNum of pageNumList;" [value]="pgNum">{{ pgNum }}</option>
+		        </select>
             </div>
 
             <div class="form-group col-xs-3">
-                <label>Per page</label>
-                <select class="form-control"></select>
+                <label>Page Size</label>
+                <select formControlName="pageSize" class="form-control">
+			        <option *ngFor="let pgSize of pageSizeList;" [value]="pgSize">{{ pgSize }}</option>
+		        </select>
+            </div>
+        </form>
+
+        <div class="col-md-12">
+            <div class="list-group">
+                <a *ngFor="let gitRep of gitRepList" class="list-group-item" [attr.href]="item.url">
+                    {{gitRep.description}}
+                </a>
             </div>
         </div>
     </div>
+
 </div>
