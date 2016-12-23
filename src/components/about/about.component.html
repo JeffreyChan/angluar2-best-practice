@@ -3,8 +3,772 @@
     <p>{{message}}</p>
     <ul>
         <li><a href="https://medium.com/tixdo-labs/angular-2-dynamic-component-loader-752c3235bf9#.lnnd39na6" title='Angular 2 dynamic component loader'>Angular 2 dynamic component loader</a></li>
-        <li><a href="https://www.lucidchart.com/techblog/2016/07/19/building-angular-2-components-on-the-fly-a-dialog-box-example/" title='Angular 2 dynamic component loader'>BUILDING ANGULAR 2 COMPONENTS ON THE FLY: A DIALOG BOX EXAMPLE</a></li>
+        <li><a href="https://www.lucidchart.com/techblog/2016/07/19/building-angular-2-components-on-the-fly-a-dialog-box-example/"
+                title='Angular 2 dynamic component loader'>BUILDING ANGULAR 2 COMPONENTS ON THE FLY: A DIALOG BOX EXAMPLE</a></li>
     </ul>
-    
-    
+
+
+</div>
+
+<div class="container">
+
+
+    <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
+        <div class="input-group-btn">
+            <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+        </div>
+    </div>
+
+    <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
+        <div class="input-group-btn">
+            <span class="glyphicon glyphicon-search"></span>
+        </div>
+    </div>
+    <div class="inner-addon left-addon">
+        <i class="glyphicon glyphicon-user"></i>
+        <input type="text" class="form-control" placeholder="Username" />
+    </div>
+
+    <div class="inner-addon right-addon">
+        <i class="glyphicon glyphicon-search"></i>
+        <input type="text" class="form-control" placeholder="Search" />
+    </div>
+
+    <br>
+    <br>
+
+    <div class="row">
+
+        <div class="form-group col-xs-6">
+            <label class="control-label">
+          <code>.inner-addon.<i>left</i>-addon</code>
+        </label>
+            <div class="inner-addon left-addon">
+                <i class="glyphicon glyphicon-user"></i>
+                <input type="text" class="form-control" placeholder="Username" />
+            </div>
+        </div>
+
+        <div class="form-group col-xs-6">
+            <label class="control-label">
+          <code>.inner-addon.<i>right</i>-addon</code>
+        </label>
+            <div class="inner-addon right-addon">
+                <i class="glyphicon glyphicon-search"></i>
+                <input type="text" class="form-control" placeholder="Search" />
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="container">
+
+    <!-- Row start 
+  <div class="row">
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-heading clearfix">
+          <i class="icon-calendar"></i>
+          <h3 class="panel-title">Input Sizing</h3>
+        </div>
+        
+        <div class="panel-body">
+          <div class="input-group input-group-lg">
+            <span class="input-group-addon">@</span>
+            <input type="text" class="form-control input-lg" placeholder="Username">
+          </div>
+          <br>
+          <div class="input-group">
+            <span class="input-group-addon">$</span>
+            <input type="text" class="form-control" placeholder="Currency">
+          </div>
+          <br>
+          <div class="input-group input-group-sm">
+            <span class="input-group-addon">{}</span>
+            <input type="text" class="form-control" placeholder="Code">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-heading clearfix">
+          <i class="icon-calendar"></i>
+          <h3 class="panel-title">Height Sizing</h3>
+        </div>
+        
+        <div class="panel-body">
+          <select class="form-control input-lg">
+            <option value="">.input-lg</option>
+          </select>
+          <br>
+          <select class="form-control">
+            <option value="">Default select</option>
+          </select>
+          <br>
+          <select class="form-control input-sm">
+            <option value="">.input-sm</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  Row end -->
+
+    <!-- Row start -->
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading clearfix">
+                    <i class="icon-calendar"></i>
+                    <h3 class="panel-title">Input Groups</h3>
+                </div>
+
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">@</span>
+                                <input type="text" class="form-control" placeholder="Username">
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-4">
+                            <div class="input-group">
+                                <input type="text" class="form-control">
+                                <span class="input-group-addon">.00</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">$</span>
+                                <input type="text" class="form-control">
+                                <span class="input-group-addon">.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Row end -->
+
+    <!-- Row start -->
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading clearfix">
+                    <i class="icon-calendar"></i>
+                    <h3 class="panel-title">Button Addons</h3>
+                </div>
+
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-6 col-sx-6">
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button" title="">Go!</button>
+                </span>
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-6 col-sx-6">
+                            <div class="input-group">
+                                <input type="text" class="form-control">
+                                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button" data-original-title="" title="">Submit!</button>
+                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Row end -->
+
+    <!-- Row start -->
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading clearfix">
+                    <i class="icon-calendar"></i>
+                    <h3 class="panel-title">Check Boxes &amp; Radio Addons</h3>
+                </div>
+
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-3">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                  <input type="checkbox">
+                </span>
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-3">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                  <input type="checkbox" checked="">
+                </span>
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-3">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                  <input type="radio" name="optionsRadio" id="optionsRadiosX" value="optionx">
+                </span>
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-3">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                  <input type="radio" name="optionsRadio" id="optionsRadiosY" value="optiony" checked="">
+                </span>
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Row end -->
+
+    <!-- Row start -->
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading clearfix">
+                    <i class="icon-calendar"></i>
+                    <h3 class="panel-title">Check boxes</h3>
+                </div>
+
+                <div class="panel-body">
+                    <label class="checkbox-inline">
+            <input type="checkbox" id="inlineCheckbox1" value="option1" checked=""> 1
+          </label>
+                    <label class="checkbox-inline">
+            <input type="checkbox" id="inlineCheckbox2" value="option2"> 2
+          </label>
+                    <label class="checkbox-inline">
+            <input type="checkbox" id="inlineCheckbox3" value="option3" disabled=""> 3
+          </label>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading clearfix">
+                    <i class="icon-calendar"></i>
+                    <h3 class="panel-title">Radio buttons</h3>
+                </div>
+
+                <div class="panel-body">
+                    <label class="radio-inline">
+            <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked=""> 1
+          </label>
+                    <label class="radio-inline">
+            <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">2
+          </label>
+                    <label class="radio-inline">
+            <input type="radio" name="optionsRadios" id="optionsRadios3" value="option2" disabled="">3
+          </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Row end -->
+
+    <!-- Row start -->
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading clearfix">
+                    <i class="icon-calendar"></i>
+                    <h3 class="panel-title">Inline Form</h3>
+                </div>
+
+                <div class="panel-body">
+                    <form class="form-inline" role="form">
+                        <div class="form-group">
+                            <label class="sr-only" for="exampleInputEmail2">Email address</label>
+                            <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Enter email">
+                        </div>
+                        <div class="form-group">
+                            <label class="sr-only" for="exampleInputPassword2">Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                <input type="checkbox"> Remember me
+              </label>
+                        </div>
+                        <button type="submit" class="btn btn-info" title="">Sign in</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Row end -->
+
+    <!-- Row start -->
+    <div class="row">
+        <div class="col-md-12 col-sm-6 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading clearfix">
+                    <i class="icon-calendar"></i>
+                    <h3 class="panel-title">Inputs</h3>
+                </div>
+
+                <div class="panel-body">
+                    <form class="form-horizontal row-border" action="#">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Default input field</label>
+                            <div class="col-md-10">
+                                <input type="text" name="regular" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Password</label>
+                            <div class="col-md-10">
+                                <input class="form-control" type="password" name="pass">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">With placeholder</label>
+                            <div class="col-md-10">
+                                <input class="form-control" type="text" name="placeholder" placeholder="placeholder">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Disabled field</label>
+                            <div class="col-md-10">
+                                <input type="text" name="disabled" disabled="disabled" value="disabled" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Read only field</label>
+                            <div class="col-md-10">
+                                <input class="form-control" type="text" name="readonly" readonly="" value="read only">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Help text</label>
+                            <div class="col-md-10">
+                                <input type="text" name="regular" class="form-control">
+                                <span class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Predefined value</label>
+                            <div class="col-md-10">
+                                <input type="text" name="regular" value="http://" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">With icon</label>
+                            <div class="col-md-10">
+                                <input type="text" name="regular" class="form-control">
+                                <i class="icon-pencil input-icon"></i>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="labelfor" class="col-md-2 control-label">Clickable label</label>
+                            <div class="col-md-10">
+                                <input type="text" name="labelfor" id="labelfor" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Column sizing</label>
+                            <div class="col-md-10">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <input type="text" class="form-control" placeholder=".col-xs-3">
+                                    </div>
+                                    <div class="col-xs-5">
+                                        <input type="text" class="form-control" placeholder=".col-xs-5">
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <input type="text" class="form-control" placeholder=".col-xs-4">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group has-success">
+                            <label class="col-md-2 control-label">Input success</label>
+                            <div class="col-md-10">
+                                <input type="text" class="form-control" id="inputSuccess" placeholder="Input Success">
+                                <i class="icon-pencil input-icon success"></i>
+                            </div>
+                        </div>
+                        <div class="form-group has-warning">
+                            <label class="col-md-2 control-label">Input warning</label>
+                            <div class="col-md-10">
+                                <input type="text" class="form-control" id="inputWarning" placeholder="Input Warning">
+                                <i class="icon-pencil input-icon warning"></i>
+                            </div>
+                        </div>
+                        <div class="form-group has-error">
+                            <label class="col-md-2 control-label">Input error</label>
+                            <div class="col-md-10">
+                                <input type="text" class="form-control" id="inputError" placeholder="Input Error">
+                                <i class="icon-pencil input-icon error"></i>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Row end -->
+
+</div>
+
+<div class="container">
+
+    <form class="well form-horizontal">
+        <fieldset>
+
+            <!-- Form Name -->
+            <legend>Contact Us Today!</legend>
+
+            <!-- Text input-->
+
+            <div class="form-group">
+                <label class="col-md-4 control-label">First Name</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input name="first_name" placeholder="First Name" class="form-control" type="text">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text input-->
+
+            <div class="form-group">
+                <label class="col-md-4 control-label">Last Name</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input name="last_name" placeholder="Last Name" class="form-control" type="text">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">E-Mail</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                        <input name="email" placeholder="E-Mail Address" class="form-control" type="text">
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Text input-->
+
+            <div class="form-group">
+                <label class="col-md-4 control-label">Phone #</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+                        <input name="phone" placeholder="(845)555-1212" class="form-control" type="text">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text input-->
+
+            <div class="form-group">
+                <label class="col-md-4 control-label">Address</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                        <input name="address" placeholder="Address" class="form-control" type="text">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text input-->
+
+            <div class="form-group">
+                <label class="col-md-4 control-label">City</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                        <input name="city" placeholder="city" class="form-control" type="text">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Select Basic -->
+
+            <div class="form-group">
+                <label class="col-md-4 control-label">State</label>
+                <div class="col-md-4 selectContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                        <select name="state" class="form-control selectpicker">
+      <option value=" " >Please select your state</option>
+      <option>Alabama</option>
+      <option>Alaska</option>
+      <option >Arizona</option>
+      <option >Arkansas</option>
+      <option >California</option>
+      <option >Colorado</option>
+      <option >Connecticut</option>
+      <option >Delaware</option>
+      <option >District of Columbia</option>
+      <option> Florida</option>
+      <option >Georgia</option>
+      <option >Hawaii</option>
+      <option >daho</option>
+      <option >Illinois</option>
+      <option >Indiana</option>
+      <option >Iowa</option>
+      <option> Kansas</option>
+      <option >Kentucky</option>
+      <option >Louisiana</option>
+      <option>Maine</option>
+      <option >Maryland</option>
+      <option> Mass</option>
+      <option >Michigan</option>
+      <option >Minnesota</option>
+      <option>Mississippi</option>
+      <option>Missouri</option>
+      <option>Montana</option>
+      <option>Nebraska</option>
+      <option>Nevada</option>
+      <option>New Hampshire</option>
+      <option>New Jersey</option>
+      <option>New Mexico</option>
+      <option>New York</option>
+      <option>North Carolina</option>
+      <option>North Dakota</option>
+      <option>Ohio</option>
+      <option>Oklahoma</option>
+      <option>Oregon</option>
+      <option>Pennsylvania</option>
+      <option>Rhode Island</option>
+      <option>South Carolina</option>
+      <option>South Dakota</option>
+      <option>Tennessee</option>
+      <option>Texas</option>
+      <option> Uttah</option>
+      <option>Vermont</option>
+      <option>Virginia</option>
+      <option >Washington</option>
+      <option >West Virginia</option>
+      <option>Wisconsin</option>
+      <option >Wyoming</option>
+    </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text input-->
+
+            <div class="form-group">
+                <label class="col-md-4 control-label">Zip Code</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                        <input name="zip" placeholder="Zip Code" class="form-control" type="text">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">Website or domain name</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
+                        <input name="website" placeholder="Website or domain name" class="form-control" type="text">
+                    </div>
+                </div>
+            </div>
+
+            <!-- radio checks -->
+            <div class="form-group">
+                <label class="col-md-4 control-label">Do you have hosting?</label>
+                <div class="col-md-4">
+                    <div class="radio">
+                        <label>
+                                    <input type="radio" name="hosting" value="yes" /> Yes
+                                </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                                    <input type="radio" name="hosting" value="no" /> No
+                                </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text area -->
+
+            <div class="form-group">
+                <label class="col-md-4 control-label">Project Description</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                        <textarea class="form-control" name="comment" placeholder="Project Description"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Success message -->
+            <div class="alert alert-success" role="alert" id="success_message">Success <i class="glyphicon glyphicon-thumbs-up"></i> Thanks for contacting us, we will get back to you shortly.</div>
+
+            <!-- Button -->
+            <div class="form-group">
+                <label class="col-md-4 control-label"></label>
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-warning">Send <span class="glyphicon glyphicon-send"></span></button>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+</div>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+            <form role="form">
+                <h2>Please Sign Up <small>It's free and always will be.</small></h2>
+                <hr class="colorgraph">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <input type="text" name="first_name" id="first_name" class="form-control input-lg" placeholder="First Name" tabindex="1">
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <input type="text" name="last_name" id="last_name" class="form-control input-lg" placeholder="Last Name" tabindex="2">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="display_name" id="display_name" class="form-control input-lg" placeholder="Display Name" tabindex="3">
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" id="email" class="form-control input-lg" placeholder="Email Address" tabindex="4">
+                </div>
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <input type="password" name="password" id="password" class="form-control input-lg" placeholder="Password" tabindex="5">
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-lg" placeholder="Confirm Password"
+                                tabindex="6">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 col-sm-3 col-md-3">
+                        <span class="button-checkbox">
+						<button type="button" class="btn" data-color="info" tabindex="7">I Agree</button>
+                        <input type="checkbox" name="t_and_c" id="t_and_c" class="hidden" value="1">
+					</span>
+                    </div>
+                    <div class="col-xs-9 col-sm-9 col-md-9">
+                        By clicking <strong class="label label-primary">Register</strong>, you agree to the <a href="#" data-toggle="modal"
+                            data-target="#t_and_c_m">Terms and Conditions</a> set out by this site, including our Cookie Use.
+                    </div>
+                </div>
+
+                <hr class="colorgraph">
+                <div class="row">
+                    <div class="col-xs-6 col-md-6"><input type="submit" value="Register" class="btn btn-primary btn-block btn-lg" tabindex="7"></div>
+                    <div class="col-xs-6 col-md-6"><a href="#" class="btn btn-success btn-block btn-lg">Sign In</a></div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <form>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        </div>
+        <div class="form-group">
+            <label for="exampleSelect1">Example select</label>
+            <select class="form-control" id="exampleSelect1">
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+    </select>
+        </div>
+        <div class="form-group">
+            <label for="exampleSelect2">Example multiple select</label>
+            <select multiple class="form-control" id="exampleSelect2">
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+    </select>
+        </div>
+        <div class="form-group">
+            <label for="exampleTextarea">Example textarea</label>
+            <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputFile">File input</label>
+            <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+            <small id="fileHelp" class="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
+        </div>
+        <fieldset class="form-group">
+            <legend>Radio buttons</legend>
+            <div class="form-check">
+                <label class="form-check-label">
+        <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+        Option one is this and that&mdash;be sure to include why it's great
+      </label>
+            </div>
+            <div class="form-check">
+                <label class="form-check-label">
+        <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
+        Option two can be something else and selecting it will deselect option one
+      </label>
+            </div>
+            <div class="form-check disabled">
+                <label class="form-check-label">
+        <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios3" value="option3" disabled>
+        Option three is disabled
+      </label>
+            </div>
+        </fieldset>
+        <div class="form-check">
+            <label class="form-check-label">
+      <input type="checkbox" class="form-check-input">
+      Check me out
+    </label>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
 </div>

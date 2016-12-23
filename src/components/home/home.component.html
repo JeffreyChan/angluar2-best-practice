@@ -1,4 +1,32 @@
-﻿<div class="panel-group">
+﻿<h1 class="page-header">Dashboard</h1>
+
+<div class="row placeholders">
+    <div class="col-xs-6 col-sm-3 placeholder">
+        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive"
+            alt="Generic placeholder thumbnail">
+        <h4>Label</h4>
+        <span class="text-muted">Something else</span>
+    </div>
+    <div class="col-xs-6 col-sm-3 placeholder">
+        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive"
+            alt="Generic placeholder thumbnail">
+        <h4>Label</h4>
+        <span class="text-muted">Something else</span>
+    </div>
+    <div class="col-xs-6 col-sm-3 placeholder">
+        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive"
+            alt="Generic placeholder thumbnail">
+        <h4>Label</h4>
+        <span class="text-muted">Something else</span>
+    </div>
+    <div class="col-xs-6 col-sm-3 placeholder">
+        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive"
+            alt="Generic placeholder thumbnail">
+        <h4>Label</h4>
+        <span class="text-muted">Something else</span>
+    </div>
+</div>
+<div class="panel-group">
 
     <h1>User List</h1>
     <h3>Users:</h3>
@@ -11,12 +39,12 @@
             <label for="name">Name</label>
 
             <input type="text" id="userName" class="form-control" formControlName="userName">
-             <em *ngIf="userForm.controls.userName.hasError('required')">Required</em>
-             <em *ngIf="userForm.controls.userName.hasError('usernameTaken')">user name exists</em>
+            <em *ngIf="userForm.controls.userName.hasError('required')">Required</em>
+            <em *ngIf="userForm.controls.userName.hasError('usernameTaken')">user name exists</em>
 
         </div>
 
-       <button type="submit" class="btn btn-primary pull-right" [disabled]="!userForm.valid">Submit</button>
+        <button type="submit" class="btn btn-primary pull-right" [disabled]="!userForm.valid">Submit</button>
 
         <p class="error" *ngIf="errorMessage">{{errorMessage}}</p>
         <pre>{{userForm.controls.userName.errors | json}}</pre>
