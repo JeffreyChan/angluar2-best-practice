@@ -82,8 +82,8 @@ export class PaginatedListComponent implements OnInit {
         };
         if (params.q) {
             return this._userService.getGitHubRepositories(params)
-                .catch((res: any) => {
-                    return Observable.of({ items: [], total_count: 0, error: res.json() });
+                .catch((errMsg: string) => {
+                    return Observable.of({ items: [], total_count: 0, error: errMsg });
                 });
         }
         else {
