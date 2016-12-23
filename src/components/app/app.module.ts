@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
-import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+
 
 import { Configuration } from './app.constants';
 import { routing } from './app.routes';
@@ -22,8 +22,6 @@ import { requestOptionsProvider }   from '../../services/default-request-options
 import { TestDataService } from '../../services/testDataService';
 
 
-import { UserData } from '../../model/user-data';
-
 @NgModule({
     imports: [
         BrowserModule,
@@ -35,7 +33,6 @@ import { UserData } from '../../model/user-data';
         CustomerModule,
         PersonModule,
         PaymentModule,
-        InMemoryWebApiModule.forRoot(UserData),
         ServicesModule
     ],
     declarations: [
