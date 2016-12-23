@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
-import { User } from '../../../model/user.model';
-
 import { Observable } from 'rxjs/Rx';
+import { Subject } from 'rxjs/Subject'
+
+import { User } from '../../../model/user.model';
 
 import { UserService } from '../../../services/user.service'
 
@@ -41,6 +41,13 @@ export class PaginatedListComponent implements OnInit {
         this.buildForm();
     }
 
+    private pageStream = new Subject<number>()
+
+    page: number = 1
+    terms: string = ""
+
+    total$: Observable<number>;
+    items$: Observable<any[]>;
     buildForm(): void {
 
         this.gitForm = this.fb.group({
@@ -49,45 +56,30 @@ export class PaginatedListComponent implements OnInit {
             'pageSize': this.pageSizeList[0]
         });
 
-        this.gitRepStream = this.gitForm.valueChanges
+        const pageSource = this.gitForm.valueChanges
             .debounceTime(1000)
             .distinctUntilChanged()
-            .switchMap(this.mapSearchCondition.bind(this))
-            .share();
+            .flatMap((fmValue: any) => {
+                const params = {
+                    q: fmValue['searchTerm'],
+                    page: fmValue['pageNum'],
+                    per_page: fmValue['pageSize']
+                };
+                this.page = params.page;
+                this.terms = params.q;
 
-        this.gitRepStream.subscribe((data: any) => {
-            if (Object.keys(data.items).length > 0) {
-                const tempList: any[] = data.items;
+                return Observable.of(params);
+            });
 
-                this.gitRepList = Object.assign(tempList, data.items);
+        const source = pageSource.switchMap(this.mapSearchCondition.bind(this)).share();
 
-                this.totalCount = data.total_count;
-                this.errorMessage = data.error;
-
-                const ctrlPageNum = this.gitForm.get('pageNum') as FormControl;
-                const ctrlPageSize = this.gitForm.get('pageSize') as FormControl;
-
-                const tmpPageSize = ctrlPageSize.value as number;
-                const totalPage = Math.round((this.totalCount + tmpPageSize - 1) / tmpPageSize);
-                const tempPageNums: number[] = [1];
-                Observable.range(2, totalPage)
-                    .subscribe(
-                    d => tempPageNums.push(d));
-                this.pageNumList = tempPageNums;
-
-                console.log(`pageNum is:${tmpPageSize} || pageIndex is ${ctrlPageNum.value}`);
-            }
-        });
+        this.total$ = source.pluck('total')
+        this.items$ = source.pluck('items')
 
 
     }
 
-    mapSearchCondition(formValue: any): any {
-        const params = {
-            q: formValue['searchTerm'],
-            page: formValue['pageNum'],
-            per_page: formValue['pageSize']
-        };
+    mapSearchCondition(params: any): any {
         if (params.q) {
             return this._userService.getGitHubRepositories(params)
                 .catch((errMsg: string) => {
