@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
-import { Observable } from 'rxjs/Rx';
+import { Observable, BehaviorSubject } from 'rxjs/Rx';
 import { Subject } from 'rxjs/Subject'
 
 import { User } from '../../../model/user.model';
 
 import { UserService } from '../../../services/user.service'
+
+import * as _ from 'lodash';
 
 
 
@@ -26,13 +28,21 @@ export class PaginatedListComponent implements OnInit {
 
     gitForm: FormGroup;
 
+    ctrlPageNum: FormControl = new FormControl();
+
     errorMessage: string;
 
-    gitRepStream: Observable<any>;
+    private pageIndex: number = 1;
+    private searchTerms: string = "";
+    private pageSize: number = this.pageSizeList[0];
+    totalSize: number;
 
-    totalCount: number;
+    private searchTermStream = new Subject<string>();
+    private pageIndexStream = new Subject<number>();
+    private pageSizelStream = new Subject<number>();
 
-    gitRepList: any[];
+    totalCount$: Observable<number>;
+    gitRepList$: Observable<any[]>;
 
     constructor(private fb: FormBuilder, private _userService: UserService) {
     }
@@ -41,42 +51,50 @@ export class PaginatedListComponent implements OnInit {
         this.buildForm();
     }
 
-    private pageStream = new Subject<number>()
-
-    page: number = 1
-    terms: string = ""
-
-    total$: Observable<number>;
-    items$: Observable<any[]>;
+    hasData: boolean;
     buildForm(): void {
 
         this.gitForm = this.fb.group({
             'searchTerm': [''],
-            'pageNum': this.pageNumList[0],
             'pageSize': this.pageSizeList[0]
         });
 
-        const pageSource = this.gitForm.valueChanges
-            .debounceTime(1000)
+        this.gitForm.valueChanges
+            .debounceTime(600)
             .distinctUntilChanged()
             .flatMap((fmValue: any) => {
                 const params = {
-                    q: fmValue['searchTerm'],
-                    page: fmValue['pageNum'],
-                    per_page: fmValue['pageSize']
+                    q: fmValue['searchTerm'] as string,
+                    page: this.pageIndex,
+                    per_page: fmValue['pageSize'] as number,
                 };
-                this.page = params.page;
-                this.terms = params.q;
-
                 return Observable.of(params);
+            })
+            .subscribe(params => {
+                this.pageIndex = params.page;
+                this.searchTerms = params.q;
+                this.pageSize = params.per_page;
+
+                this.searchTermStream.next(params.q);
+                this.pageSizelStream.next(params.per_page);
             });
 
-        const source = pageSource.switchMap(this.mapSearchCondition.bind(this)).share();
+        const source = this.searchTermStream.startWith(this.searchTerms)
+            .combineLatest(this.pageIndexStream.startWith(this.pageIndex),
+            this.pageSizelStream.startWith(this.pageSize),
+            (q: string, page: number, per_page: number) => {
+                return { q, page, per_page };
+            })
+            .switchMap((this.mapSearchCondition.bind(this)))
+            .share();
 
-        this.total$ = source.pluck('total')
-        this.items$ = source.pluck('items')
+        this.gitRepList$ = source.pluck('items');
+        this.totalCount$ = source.pluck('total_count');
 
+        this.totalCount$.subscribe(d => {
 
+            this.pageNumList = [1, 2, 3, 4, 5, 6];
+        });
     }
 
     mapSearchCondition(params: any): any {
@@ -89,5 +107,10 @@ export class PaginatedListComponent implements OnInit {
         else {
             return Observable.of({ items: [], total_count: 0 });
         }
+    }
+
+    pageHandler(page: number) {
+        console.log(`page index handler${page}`);
+        this.pageIndexStream.next(page)
     }
 }

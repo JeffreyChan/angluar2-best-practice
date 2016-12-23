@@ -6,7 +6,7 @@
 
     <div class="panel-body">
         <form [formGroup]="gitForm" (ngSubmit)="onSubmit()">
-            <div class="form-group col-xs-6">
+            <div class="form-group col-xs-8">
                 <label for="searchTerm">Search term</label>
                 <div class="inner-addon right-addon">
                     <i class="glyphicon glyphicon-search"></i>
@@ -16,22 +16,15 @@
                     {{ errorMessage }}
                 </p>
             </div>
-            <div class="form-group col-xs-3">
-                <label>Page Number</label>
-                <select formControlName="pageNum" class="form-control">
-			        <option *ngFor="let pgNum of pageNumList;" [value]="pgNum">{{ pgNum }}</option>
-		        </select>
-            </div>
-
-            <div class="form-group col-xs-3">
+            <div class="form-group col-xs-4">
                 <label>Page Size</label>
                 <select formControlName="pageSize" class="form-control">
-			        <option *ngFor="let pgSize of pageSizeList;" [value]="pgSize">{{ pgSize }}</option>
+			        <option *ngFor="let pgSize of pageSizeList" [value]="pgSize">{{ pgSize }}</option>
 		        </select>
             </div>
         </form>
 
-        <div class="col-md-12" *ngIf="totalCount">
+        <div class="col-md-12">
             <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
@@ -43,7 +36,7 @@
                     </tr>
                 </thead>
                 <tbody class="table-hover">
-                    <tr *ngFor="let gitRep of gitRepList">
+                    <tr *ngFor="let gitRep of gitRepList$ | async">
                         <th scope="row">{{gitRep.id}}</th>
                         <td>{{gitRep.name}}</td>
                         <td>{{gitRep.full_name}}</td>
@@ -52,6 +45,13 @@
                     </tr>
                 </tbody>
             </table>
+            <div class="form-group col-xs-3">
+                <label>Page Number</label>
+                <select [formControl]="ctrlPageNum" class="form-control">
+			        <option *ngFor="let pgNum of pageNumList;" [value]="pgNum">{{ pgNum }}</option>
+		        </select>
+            </div>
+            <pagination [total]="totalCount$ | async" [page]="page" (pageClickEvt)="pageHandler($event)" [params]="{q: terms}"></pagination>
         </div>
     </div>
 
