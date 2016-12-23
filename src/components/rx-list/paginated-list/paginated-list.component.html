@@ -31,12 +31,27 @@
             </div>
         </form>
 
-        <div class="col-md-12">
-            <div class="list-group">
-                <a *ngFor="let gitRep of gitRepList" class="list-group-item" [attr.href]="item.url">
-                    {{gitRep.description}}
-                </a>
-            </div>
+        <div class="col-md-12" *ngIf="totalCount">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Full Name</th>
+                        <th>Language</th>
+                        <th>HTML URL</th>
+                    </tr>
+                </thead>
+                <tbody class="table-hover">
+                    <tr *ngFor="let gitRep of gitRepList">
+                        <th scope="row">{{gitRep.id}}</th>
+                        <td>{{gitRep.name}}</td>
+                        <td>{{gitRep.full_name}}</td>
+                        <td>{{gitRep.language}}</td>
+                        <td>{{gitRep.html_url}}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 

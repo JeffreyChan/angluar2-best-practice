@@ -40,9 +40,6 @@ import { TestDataService } from '../../services/testDataService';
         AboutComponent,
         HomeComponent
     ],
-    providers: [
-        
-    ],
     bootstrap: [AppComponent],
 })
 

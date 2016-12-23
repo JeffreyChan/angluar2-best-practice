@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Http, Response } from '@angular/http';
 
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
@@ -21,7 +20,7 @@ import { UserService } from '../../../services/user.service'
 export class PaginatedListComponent implements OnInit {
 
     //init data
-    pageNumList: number[] = [1, 2];
+    pageNumList: number[] = [1];
 
     pageSizeList: number[] = [10, 30, 50, 100];
 
@@ -35,17 +34,7 @@ export class PaginatedListComponent implements OnInit {
 
     gitRepList: any[];
 
-    constructor(private fb: FormBuilder, private _userService: UserService, private _http:Http) {
-
-        this._http
-            .get('https://api.github.com/search/repositories?q=ng2&page=1&per_page=10')
-            .map((res: Response) => res.json())
-            .catch((res: Response) => {
-              return Observable.of({items: [], totalCount: 0, error: res.json()});
-            })
-            .subscribe(d => {
-                console.log(d);
-            });
+    constructor(private fb: FormBuilder, private _userService: UserService) {
     }
 
     ngOnInit(): void {
@@ -66,11 +55,30 @@ export class PaginatedListComponent implements OnInit {
             .switchMap(this.mapSearchCondition.bind(this))
             .share();
 
-        this.gitRepStream.subscribe(data => {
-            this.gitRepList = data.items;
-            this.totalCount = data.total_count;
-            this.errorMessage = data.error
+        this.gitRepStream.subscribe((data: any) => {
+            if (Object.keys(data.items).length > 0) {
+                const tempList: any[] = data.items;
+
+                this.gitRepList = Object.assign(tempList, data.items);
+
+                this.totalCount = data.total_count;
+                this.errorMessage = data.error;
+
+                const ctrlPageNum = this.gitForm.get('pageNum') as FormControl;
+                const ctrlPageSize = this.gitForm.get('pageSize') as FormControl;
+
+                const tmpPageSize = ctrlPageSize.value as number;
+                const totalPage = Math.round((this.totalCount + tmpPageSize - 1) / tmpPageSize);
+                const tempPageNums: number[] = [1];
+                Observable.range(2, totalPage)
+                    .subscribe(
+                    d => tempPageNums.push(d));
+                this.pageNumList = tempPageNums;
+
+                console.log(`pageNum is:${tmpPageSize} || pageIndex is ${ctrlPageNum.value}`);
+            }
         });
+
 
     }
 
