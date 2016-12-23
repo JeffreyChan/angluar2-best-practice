@@ -1,19 +1,15 @@
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h3 class="panel-title">
-            <div id="nav">
-                <nav>
-                    <a href=" ">AAAA</a>
-                    <a href="#">BBBBB</a>
-                    <a href="#">CCCCC</a>
-                </nav>
-            </div>
-        </h3>
+<h1 class="page-header">Reactive Extension Js Collection</h1>
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-left">
+                <li [routerLinkActive]="['active']"><a [routerLink]="['/rx-list/smart-search']">Smart  Search</a></li>
+                <li [routerLinkActive]="['active']"> <a [routerLinkActive]="['active']" [routerLink]="['/rx-list/paginated-list']">Paginated List</a></li>
+            </ul>
+        </div>
     </div>
-   <div class="panel-body">
-       <router-outlet></router-outlet>
-   </div>
-
-
-    
+</nav>
+<div class="panel-group">
+    <router-outlet></router-outlet>
 </div>

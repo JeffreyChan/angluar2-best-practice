@@ -11,7 +11,7 @@ import { UserService } from '../../../services/user.service'
 @Component({
     selector: 'smart-search',
     templateUrl: 'smart-search.component.html',
-    
+
 })
 
 export class SmartSearchComponent implements OnInit {
@@ -27,10 +27,15 @@ export class SmartSearchComponent implements OnInit {
 
     ngOnInit(): void {
         this.userList = this.userNameCtrl.valueChanges
-            .filter(x => x.length > 2)
             .debounceTime(400)
             .distinctUntilChanged()
-            .switchMap(value => this._userService.searchUsers(value));
+            .switchMap(value => {
+                if (value.length > 2) {
+                    return this._userService.searchUsers(value);
+                } else {
+                    return Observable.of([]);
+                }
+            });
 
     }
 }

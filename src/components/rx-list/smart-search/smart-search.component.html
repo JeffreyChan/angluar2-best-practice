@@ -1,7 +1,16 @@
-<div class="panel-group">
-    <h2>Smart Search</h2>
-    <input type="text" class="form-control" [formControl]="userNameCtrl">
-    <ul>
-        <li *ngFor="let item of userList | async">{{item.name}}</li>
-    </ul>
+<div class="panel panel-default">
+    <div class="panel-heading clearfix">
+        <i class="icon-calendar"></i>
+        <h3 class="panel-title">Smart Search</h3>
+    </div>
+
+    <div class="panel-body">
+        <div class="col-lg-6 col-sm-6 col-sx-6">
+            <input type="text" placeholder="UserName" class="form-control" [formControl]="userNameCtrl">
+        </div>
+        
+        <ul>
+            <li *ngFor="let item of userList | async">{{item.name}}</li>
+        </ul>
+    </div>
 </div>

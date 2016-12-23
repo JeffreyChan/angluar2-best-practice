@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { Headers, RequestOptions } from '@angular/http';
+import { Headers, RequestOptions, URLSearchParams } from '@angular/http';
 
 import { User } from '../model/user.model';
 import { Observable } from 'rxjs/Observable';
@@ -14,6 +14,12 @@ export class UserService {
     getUsers(): Observable<User[]> {
         return this.http.get(this.usersUrl)
             .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    getGitHubRepositories(params: any): Observable<any> {
+        return this.http.get(`https://api.github.com/search/repositories?${this.toParamsString(params)}`)
+            .map((res:Response) => res.json())
             .catch(this.handleError);
     }
 
@@ -52,5 +58,13 @@ export class UserService {
         }
         console.error(errMsg);
         return Observable.throw(errMsg);
+    }
+
+    private toParamsString(params: any): string {
+        let urlSearchParams = new URLSearchParams();
+        for (let key in params) {
+            urlSearchParams.append(key, params[key]);
+        };
+        return urlSearchParams.toString();
     }
 }

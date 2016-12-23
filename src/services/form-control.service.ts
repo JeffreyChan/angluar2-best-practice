@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { URLSearchParams } from '@angular/http';
 
 
 @Injectable()
 export class FormControlService {
     constructor() { }
 
-    handleValidations(errorDict: any, validationMessages:any, fg: FormGroup) {
+    handleValidations(errorDict: any, validationMessages: any, fg: FormGroup) {
         // avoid mutation
         const fields = Object.assign({}, errorDict);
 
@@ -22,5 +23,13 @@ export class FormControlService {
         }
 
         return fields;
+    }
+
+    toParamsString(params: any): string {
+        let urlSearchParams = new URLSearchParams();
+        for (let key in params) {
+            urlSearchParams.append(key, params[key]);
+        };
+        return urlSearchParams.toString();
     }
 }

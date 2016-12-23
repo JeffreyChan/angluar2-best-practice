@@ -6,6 +6,7 @@ import {RxListRoutintg} from './rx-list.routes'
 
 import { RxListComponent } from './rx-list.component';
 import { SmartSearchComponent } from './smart-search/smart-search.component';
+import { PaginatedListComponent } from './paginated-list/paginated-list.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { SmartSearchComponent } from './smart-search/smart-search.component';
     ],
     declarations: [
         RxListComponent,
-        SmartSearchComponent
+        SmartSearchComponent,
+        PaginatedListComponent
     ],
     exports: [RxListComponent],
 })
