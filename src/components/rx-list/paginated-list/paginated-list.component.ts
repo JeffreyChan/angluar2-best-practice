@@ -45,7 +45,7 @@ export class PaginatedListComponent implements OnInit {
             })
             .subscribe(d => {
                 console.log(d);
-            })
+            });
     }
 
     ngOnInit(): void {
@@ -53,7 +53,7 @@ export class PaginatedListComponent implements OnInit {
     }
 
     buildForm(): void {
-        
+
         this.gitForm = this.fb.group({
             'searchTerm': [''],
             'pageNum': this.pageNumList[0],
