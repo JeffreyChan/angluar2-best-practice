@@ -45,7 +45,7 @@
                     </tr>
                 </tbody>
             </table>
-            <pagination [total]="totalCount$ | async" [page]="pageIndex" (pageClickEvt)="pageHandler($event)"></pagination>
+            <pagination [size]="pageSize" [total]="totalCount$ | async" [page]="pageIndex" (pageClickEvt)="pageHandler($event)"></pagination>
 
         </div>
     </div>
