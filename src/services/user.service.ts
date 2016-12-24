@@ -18,8 +18,9 @@ export class UserService {
     }
 
     getGitHubRepositories(params: any): Observable<any> {
+        var githubAPI = `https://api.github.com/search/repositories?${this.toParamsString(params)}`;
         console.log(`call github api now:${Date.now()}`);
-        return this.http.get(`https://api.github.com/search/repositories?${this.toParamsString(params)}`)
+        return this.http.get(githubAPI)
             .map((res: Response) => res.json())
             .catch(this.handleError);
     }
