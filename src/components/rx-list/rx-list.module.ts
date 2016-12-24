@@ -14,6 +14,7 @@ import { PaginatedListComponent } from './paginated-list/paginated-list.componen
 @NgModule({
     imports: [
         CommonModule,
+        FormsModule,
         ReactiveFormsModule,
         RxListRoutintg
     ],

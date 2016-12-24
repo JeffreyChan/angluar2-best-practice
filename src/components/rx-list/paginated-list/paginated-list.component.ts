@@ -22,13 +22,9 @@ import * as _ from 'lodash';
 export class PaginatedListComponent implements OnInit {
 
     //init data
-    pageNumList: number[] = [1];
-
     pageSizeList: number[] = [10, 30, 50, 100];
 
     gitForm: FormGroup;
-
-    ctrlPageNum: FormControl = new FormControl();
 
     errorMessage: string;
 
@@ -62,13 +58,13 @@ export class PaginatedListComponent implements OnInit {
         this.gitForm.valueChanges
             .debounceTime(600)
             .distinctUntilChanged()
-            .flatMap((fmValue: any) => {
+            .map((fmValue: any) => {
                 const params = {
                     q: fmValue['searchTerm'] as string,
                     page: this.pageIndex,
                     per_page: fmValue['pageSize'] as number,
                 };
-                return Observable.of(params);
+                return params;
             })
             .subscribe(params => {
                 this.pageIndex = params.page;
@@ -91,10 +87,9 @@ export class PaginatedListComponent implements OnInit {
         this.gitRepList$ = source.pluck('items');
         this.totalCount$ = source.pluck('total_count');
 
-        this.totalCount$.subscribe(d => {
-
-            this.pageNumList = [1, 2, 3, 4, 5, 6];
-        });
+        /*this.totalCount$.subscribe(totalSize => {
+            this.totalSize = totalSize;
+        });*/
     }
 
     mapSearchCondition(params: any): any {
@@ -110,7 +105,7 @@ export class PaginatedListComponent implements OnInit {
     }
 
     pageHandler(page: number) {
-        console.log(`page index handler${page}`);
+        this.pageIndex = page;
         this.pageIndexStream.next(page)
     }
 }

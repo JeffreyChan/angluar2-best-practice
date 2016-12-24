@@ -1,5 +1,6 @@
 import * as _ from 'lodash'
 import { Component, Input, EventEmitter, Output } from '@angular/core'
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Location } from '@angular/common'
 
 @Component({
@@ -7,13 +8,18 @@ import { Location } from '@angular/common'
     templateUrl: './pagination.component.html'
 })
 export class PaginationComponent {
-    totalPage: number = 0
 
+    ctrlPageNum: FormControl = new FormControl();
+
+    totalPage: number = 0;
     @Input()
     params: { [key: string]: string | number } = {}
 
     @Input()
-    total: number = 0
+    size: number = 10;
+
+    @Input()
+    total: number = 0;
 
     @Input()
     page: number = 1
@@ -24,11 +30,11 @@ export class PaginationComponent {
     constructor() { }
 
     totalPages() {
-        return Math.ceil(this.total / 10)
+        return Math.ceil(this.total / this.size)
     }
 
     rangeStart() {
-        return Math.floor(this.page / 10) * 10 + 1
+        return Math.floor(this.page / this.size) * this.size + 1;
     }
 
     pagesRange() {
@@ -41,12 +47,6 @@ export class PaginationComponent {
 
     nextPage() {
         return Math.min(this.page + 1, this.totalPages())
-    }
-
-    pageParams(page: number) {
-        let params = _.clone(this.params)
-        params['page'] = page
-        return params
     }
 
     pageClicked(page: number) {

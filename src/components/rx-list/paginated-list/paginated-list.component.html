@@ -45,13 +45,8 @@
                     </tr>
                 </tbody>
             </table>
-            <div class="form-group col-xs-3">
-                <label>Page Number</label>
-                <select [formControl]="ctrlPageNum" class="form-control">
-			        <option *ngFor="let pgNum of pageNumList;" [value]="pgNum">{{ pgNum }}</option>
-		        </select>
-            </div>
-            <pagination [total]="totalCount$ | async" [page]="page" (pageClickEvt)="pageHandler($event)" [params]="{q: terms}"></pagination>
+            <pagination [total]="totalCount$ | async" [page]="pageIndex" (pageClickEvt)="pageHandler($event)"></pagination>
+
         </div>
     </div>
 
