@@ -3,6 +3,8 @@ import { Component, Input, EventEmitter, Output } from '@angular/core'
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Location } from '@angular/common'
 
+import { Observable, BehaviorSubject } from 'rxjs/Rx';
+
 @Component({
     selector: 'pagination',
     templateUrl: './pagination.component.html'
@@ -35,6 +37,10 @@ export class PaginationComponent {
 
     rangeStart() {
         return Math.floor(this.page / this.size) * this.size + 1;
+    }
+
+    pageValues() {
+        return Observable.of(_.times(this.totalPages()).map((n: number) => n + 1));
     }
 
     pagesRange() {

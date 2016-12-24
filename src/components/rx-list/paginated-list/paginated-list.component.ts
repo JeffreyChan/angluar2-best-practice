@@ -47,7 +47,7 @@ export class PaginatedListComponent implements OnInit {
         this.buildForm();
     }
 
-    hasData: boolean;
+    isLoading: boolean;
     buildForm(): void {
 
         this.gitForm = this.fb.group({
@@ -56,7 +56,7 @@ export class PaginatedListComponent implements OnInit {
         });
 
         this.gitForm.valueChanges
-            .debounceTime(600)
+            .debounceTime(1000)
             .distinctUntilChanged()
             .map((fmValue: any) => {
                 const params = {
@@ -81,19 +81,29 @@ export class PaginatedListComponent implements OnInit {
             (q: string, page: number, per_page: number) => {
                 return { q, page, per_page };
             })
+            .do(x => {
+                if (!this.isLoading) {
+                    this.isLoading = true;
+                    console.log(`before loading call time:${Date.now()}`);
+                }
+
+            })
             .switchMap((this.mapSearchCondition.bind(this)))
             .share();
 
         this.gitRepList$ = source.pluck('items');
         this.totalCount$ = source.pluck('total_count');
 
-        /*this.totalCount$.subscribe(totalSize => {
-            this.totalSize = totalSize;
-        });*/
+        source.subscribe((data: any) => {
+            this.errorMessage = data.error;
+            this.totalSize = data.total_count;
+            this.isLoading = false;
+            console.log(`after loading call time:${Date.now()}`);
+        });
     }
 
     mapSearchCondition(params: any): any {
-        if (params.q) {
+        if (params.q && params.q.length > 2) {
             return this._userService.getGitHubRepositories(params)
                 .catch((errMsg: string) => {
                     return Observable.of({ items: [], total_count: 0, error: errMsg });

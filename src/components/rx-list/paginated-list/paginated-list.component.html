@@ -5,15 +5,19 @@
     </div>
 
     <div class="panel-body">
-        <form [formGroup]="gitForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="gitForm">
             <div class="form-group col-xs-8">
                 <label for="searchTerm">Search term</label>
                 <div class="inner-addon right-addon">
                     <i class="glyphicon glyphicon-search"></i>
-                    <input type="text" class="form-control" id="searchTerm" formControlName="searchTerm" />
+                    <input type="text" placeholder="Github Search" class="form-control" id="searchTerm" formControlName="searchTerm" />
                 </div>
                 <p *ngIf="errorMessage" class="help-block">
                     {{ errorMessage }}
+                </p>
+
+                <p *ngIf="isLoading" class="help-block">
+                    loading now
                 </p>
             </div>
             <div class="form-group col-xs-4">
@@ -45,7 +49,8 @@
                     </tr>
                 </tbody>
             </table>
-            <pagination [size]="pageSize" [total]="totalCount$ | async" [page]="pageIndex" (pageClickEvt)="pageHandler($event)"></pagination>
+            <pagination [size]="pageSize" [total]="totalCount$ | async"
+             [page]="pageIndex" (pageClickEvt)="pageHandler($event)"></pagination>
 
         </div>
     </div>

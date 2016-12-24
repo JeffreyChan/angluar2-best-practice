@@ -3,9 +3,8 @@
     <li *ngFor="let p of pagesRange()" [class.active]="page == p"><a (click)="pageClicked(p)">{{p}}</a></li>
     <li *ngIf="totalPages() > page"><a (click)="pageClicked(nextPage())">»</a></li>
 </ul>
-<pre>pageIndex is {{page}}</pre> {{rangeStart()}}
 <div class="col-md-3">
-    <select *ngIf="totalPages() > 1" [ngModel]="page"  (change)="pageClicked($event.target.value)">
-			        <option *ngFor="let pgNum of pagesRange()" [selected]="page == pgNum" [value]="pgNum">{{ pgNum }}</option>
+    <select *ngIf="totalPages() > 1" [ngModel]="page" (change)="pageClicked($event.target.value)">
+			        <option *ngFor="let pgNum of pageValues() | async" [value]="pgNum">{{ pgNum }}</option>
 		        </select>
 </div>
