@@ -1,0 +1,18 @@
+<div class="panel panel-default">
+    <div class="panel-heading clearfix">
+        <i class="icon-calendar"></i>
+        <h3 class="panel-title">Smart Search</h3>
+    </div>
+
+    <div class="panel-body">
+        <div class="col-lg-10 col-sm-10 col-sx-10">
+            <div class="alert alert-info" role="alert">{{count$ | async}}</div>
+        </div>
+
+        <div class="col-lg-4 col-sm-4 col-sx-4">
+            <button (click)="increment()" type="button" class="btn btn-primary">Increment</button>
+            <button (click)="decrement ()" type="button" class="btn btn-danger">Decrement</button>
+        </div>
+
+    </div>
+</div>

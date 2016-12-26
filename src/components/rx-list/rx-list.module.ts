@@ -11,6 +11,7 @@ import { PaginationComponent } from './paginated-list/pagination.component';
 import { PaginatedListComponent } from './paginated-list/paginated-list.component';
 
 import { WhoToFollowComponent } from './who-to-follow/who-to-follow.component';
+import { SimpleCounteromponent } from './simple-counter/simple-counter.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { WhoToFollowComponent } from './who-to-follow/who-to-follow.component';
     ],
     declarations: [
         RxListComponent,
+        SimpleCounteromponent,
         SmartSearchComponent,
         PaginationComponent,
         PaginatedListComponent,
