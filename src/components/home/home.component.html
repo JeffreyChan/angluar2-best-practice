@@ -34,11 +34,11 @@
         <li *ngFor="let user of users">{{user.name}}</li>
     </ul>
 
-    <form [formGroup]="userForm" novalidate (ngSubmit)="addUser()">
+    <form [formGroup]="userForm"  #theForm="ngForm" novalidate (ngSubmit)="addUser()">
         <div class="form-group">
             <label for="name">Name</label>
 
-            <input type="text" id="userName" class="form-control" formControlName="userName">
+            <input #txtUserName type="text" id="userName" class="form-control" formControlName="userName">
             <em *ngIf="userForm.controls.userName.hasError('required')">Required</em>
             <em *ngIf="userForm.controls.userName.hasError('usernameTaken')">user name exists</em>
 
@@ -48,5 +48,7 @@
 
         <p class="error" *ngIf="errorMessage">{{errorMessage}}</p>
         <pre>{{userForm.controls.userName.errors | json}}</pre>
+        <pre>{{ txtUserName.value | json}}</pre>
+        <pre>{{ theForm.value | json}}</pre>
     </form>
 </div>

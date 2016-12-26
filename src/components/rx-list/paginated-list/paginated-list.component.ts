@@ -61,8 +61,6 @@ export class PaginatedListComponent implements OnInit {
         });
 
         this.gitForm.valueChanges
-            .debounceTime(1000)
-            .distinctUntilChanged()
             .map((fmValue: any) => {
                 const params = {
                     q: fmValue['searchTerm'] as string,
@@ -72,18 +70,23 @@ export class PaginatedListComponent implements OnInit {
             })
             .subscribe(params => {
                 this.searchSouceStream.next(params);
+                this.pageIndexStream.next(1);
             });
 
         const source = this.searchSouceStream
             .combineLatest(this.pageIndexStream.startWith(this.pageIndex),
             (params: { q: string, per_page: number }, page: number) => {
                 return { q: params.q, page: page, per_page: params.per_page };
-            }).do(params => {
-                if (!this.isLoading) {
-                    this.isLoading = true;
-                    console.log(`before loading call time:${Date.now()}`);
-                }
+            })
+            .debounceTime(1000)
+            .distinctUntilChanged()
+            .do(params => {
+                this.pageIndex = params.page;
+                this.searchTerms = params.q;
+                this.pageSize = params.per_page;
 
+                this.isLoading = true;
+                console.log(`before loading call time:${Date.now()}`);
             })
             .switchMap((this.mapSearchCondition.bind(this)))
             .share();
@@ -100,11 +103,8 @@ export class PaginatedListComponent implements OnInit {
     }
 
     mapSearchCondition(params: any): any {
+        console.log(`pageIndex:${params.page}    pageSzie:${params.per_page}`);
         if (params.q && params.q.length > 2) {
-            console.log(`pageIndex:${params.page}    pageSzie:${params.per_page}`);
-            this.pageIndex = params.page;
-            this.searchTerms = params.q;
-            this.pageSize = params.per_page;
             return this._userService.getGitHubRepositories(params)
                 .catch((errMsg: string) => {
                     return Observable.of({ items: [], total_count: 0, error: errMsg });

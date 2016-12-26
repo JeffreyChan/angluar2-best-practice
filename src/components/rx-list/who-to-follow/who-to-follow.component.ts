@@ -75,6 +75,8 @@ export class WhoToFollowComponent implements OnInit {
             .combineLatest(responseStream, (closeClick: string, listUsers: any[]) => {
                 return listUsers[Math.floor(Math.random() * listUsers.length)];
             }).merge(this.refreshClickStream.mapTo(null))
+            .debounceTime(750)
+            .distinctUntilChanged()
             .startWith(null);
     }
 
