@@ -8,10 +8,6 @@ import { HttpModule } from '@angular/http';
 import { Configuration } from './app.constants';
 import { routing } from './app.routes';
 
-import { CustomerModule } from '../customer/customer.module';
-import { PersonModule } from '../person/person.module';
-import { PaymentModule } from '../payment/payment.module';
-
 import { ServicesModule } from '../../services/service.module';
 
 import { AppComponent } from './app.component';
@@ -30,9 +26,6 @@ import { TestDataService } from '../../services/testDataService';
         HttpModule,
         FormsModule,
         ReactiveFormsModule,
-        CustomerModule,
-        PersonModule,
-        PaymentModule,
         ServicesModule
     ],
     declarations: [

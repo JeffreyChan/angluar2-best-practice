@@ -1,31 +1,35 @@
-<h2 class="sub-header">Customer Dynamic Static Form Reactive</h2>
-<div class="rows">
-    <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-            <label for="name">Name</label>
+<div class="panel panel-default">
+    <div class="panel-heading clearfix">
+        <i class="icon-calendar"></i>
+        <h3 class="panel-title">Customer Dynamic Static Form Reactive</h3>
+    </div>
+    <div class="panel-body">
+        <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="name">Name</label>
 
-            <input type="text" id="name" class="form-control" formControlName="name">
+                <input type="text" id="name" class="form-control" formControlName="name">
 
-            <div *ngIf="formErrors.name" class="alert alert-danger">
-                {{ formErrors.name }}
+                <div *ngIf="formErrors.name" class="alert alert-danger">
+                    {{ formErrors.name }}
+                </div>
+
             </div>
 
-        </div>
-
-        <div formArrayName="addresses">
-            <div *ngFor="let address of addressesFormArray.controls; let i=index" class="panel panel-default">
-                <div class="panel-heading">
-                    <span>Address {{i + 1}}</span>
-                    <span class="glyphicon glyphicon-remove pull-right" *ngIf="addressesFormArray.controls.length > 1" (click)="removeAddress(i)"></span>
-                </div>
-                <div class="panel-body" [formGroupName]="i">
-                    <address [group]="address" [addressError]="addressErrors[i]"></address>
+            <div formArrayName="addresses">
+                <div *ngFor="let address of addressesFormArray.controls; let i=index" class="panel panel-default">
+                    <div class="panel-heading">
+                        <span>Address {{i + 1}}</span>
+                        <span class="glyphicon glyphicon-remove pull-right" *ngIf="addressesFormArray.controls.length > 1" (click)="removeAddress(i)"></span>
+                    </div>
+                    <div class="panel-body" [formGroupName]="i">
+                        <address [group]="address" [addressError]="addressErrors[i]"></address>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="margin-20">
-            <a (click)="addAddress()" style="cursor: default"> Add another address +</a>
+            <div class="margin-20">
+                <a (click)="addAddress()" style="cursor: default"> Add another address +</a>
 </div>
 
 <div class="margin-20">
@@ -39,4 +43,5 @@
     <pre>form value: <br>{{customerForm.value | json}}</pre>
 </div>
 </form>
+</div>
 </div>
