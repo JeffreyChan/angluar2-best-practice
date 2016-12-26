@@ -10,6 +10,8 @@ import { SmartSearchComponent } from './smart-search/smart-search.component';
 import { PaginationComponent } from './paginated-list/pagination.component';
 import { PaginatedListComponent } from './paginated-list/paginated-list.component';
 
+import { WhoToFollowComponent } from './who-to-follow/who-to-follow.component';
+
 
 @NgModule({
     imports: [
@@ -22,7 +24,8 @@ import { PaginatedListComponent } from './paginated-list/paginated-list.componen
         RxListComponent,
         SmartSearchComponent,
         PaginationComponent,
-        PaginatedListComponent
+        PaginatedListComponent,
+        WhoToFollowComponent
     ],
     exports: [RxListComponent],
 })

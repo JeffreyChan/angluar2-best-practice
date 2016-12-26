@@ -25,6 +25,13 @@ export class UserService {
             .catch(this.handleError);
     }
 
+    getGitHubUsers(randomOffset: number): Observable<any> {
+        var githubUserApiUrl = `https://api.github.com/users?since=${randomOffset}`;
+        return this.http.get(githubUserApiUrl)
+            .map((res: Response) => res.json())
+            .catch(this.handleError);
+    }
+
     searchUsers(userName: string): Observable<User[]> {
         return this.http.get(this.usersUrl + `?name=^${userName}`)
             .map(this.extractData)

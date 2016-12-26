@@ -35,6 +35,11 @@ export class PaginatedListComponent implements OnInit {
 
     private searchTermStream = new Subject<string>();
     private pageIndexStream = new Subject<number>();
+
+
+    private searchSouceStream = new Subject<{ q: string, per_page: number }>();
+
+
     private pageSizelStream = new Subject<number>();
 
     totalCount$: Observable<number>;
@@ -61,27 +66,19 @@ export class PaginatedListComponent implements OnInit {
             .map((fmValue: any) => {
                 const params = {
                     q: fmValue['searchTerm'] as string,
-                    page: this.pageIndex,
                     per_page: fmValue['pageSize'] as number,
                 };
                 return params;
             })
             .subscribe(params => {
-                this.pageIndex = params.page;
-                this.searchTerms = params.q;
-                this.pageSize = params.per_page;
-
-                this.searchTermStream.next(params.q);
-                this.pageSizelStream.next(params.per_page);
+                this.searchSouceStream.next(params);
             });
 
-        const source = this.searchTermStream.startWith(this.searchTerms)
+        const source = this.searchSouceStream
             .combineLatest(this.pageIndexStream.startWith(this.pageIndex),
-            this.pageSizelStream.startWith(this.pageSize),
-            (q: string, page: number, per_page: number) => {
-                return { q, page, per_page };
-            })
-            .do(x => {
+            (params: { q: string, per_page: number }, page: number) => {
+                return { q: params.q, page: page, per_page: params.per_page };
+            }).do(params => {
                 if (!this.isLoading) {
                     this.isLoading = true;
                     console.log(`before loading call time:${Date.now()}`);
@@ -104,6 +101,10 @@ export class PaginatedListComponent implements OnInit {
 
     mapSearchCondition(params: any): any {
         if (params.q && params.q.length > 2) {
+            console.log(`pageIndex:${params.page}    pageSzie:${params.per_page}`);
+            this.pageIndex = params.page;
+            this.searchTerms = params.q;
+            this.pageSize = params.per_page;
             return this._userService.getGitHubRepositories(params)
                 .catch((errMsg: string) => {
                     return Observable.of({ items: [], total_count: 0, error: errMsg });
@@ -115,7 +116,6 @@ export class PaginatedListComponent implements OnInit {
     }
 
     pageHandler(page: number) {
-        this.pageIndex = page;
         this.pageIndexStream.next(page)
     }
 }

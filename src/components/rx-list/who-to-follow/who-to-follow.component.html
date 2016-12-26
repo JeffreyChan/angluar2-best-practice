@@ -1,0 +1,39 @@
+<div class="panel panel-default">
+    <div class="panel-heading clearfix">
+        <i class="icon-calendar"></i>
+        <h3 class="panel-title">Who To Follow</h3>
+    </div>
+
+    <div class="panel-body">
+        <button (click)="refreshUser()">Refresh</button>
+        <div class="panel panel-default" *ngIf="userList[0]">
+            <div class="panel-heading">{{userList[0]?.login}}</div>
+            <div class="panel-body">
+                <img width="40" height="40" [src]="userList[0]?.avatar_url">
+            </div>
+            <div class="panel-footer">
+                <button class="btn btn-danger" (click)="closeUser1()"><span class="glyphicon glyphicon-remove"></span></button>
+            </div>
+        </div>
+
+        <div class="panel panel-default" *ngIf="userList[1]">
+            <div class="panel-heading">{{userList[1]?.login}}</div>
+            <div class="panel-body">
+                <img width="40" height="40" [src]="userList[1]?.avatar_url">
+            </div>
+            <div class="panel-footer">
+                <button class="btn btn-danger" (click)="closeUser2()"><span class="glyphicon glyphicon-remove"></span></button>
+            </div>
+        </div>
+
+        <div class="panel panel-default"  *ngIf="userList[2]">
+            <div class="panel-heading">{{userList[2]?.login}}</div>
+            <div class="panel-body">
+                <img width="40" height="40"  [src]="userList[2]?.avatar_url">
+            </div>
+            <div class="panel-footer">
+                <button class="btn btn-danger" (click)="closeUser3()"><span class="glyphicon glyphicon-remove"></span></button>
+            </div>
+        </div>
+    </div>
+</div>
