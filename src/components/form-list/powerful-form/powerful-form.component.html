@@ -1,0 +1,14 @@
+<div class="panel panel-default">
+    <div class="panel-heading clearfix">
+        <i class="icon-calendar"></i>
+        <h3 class="panel-title">powerful form validation component</h3>
+    </div>
+    <div class="panel-body">
+        <form [formGroup]="powerForm" #theForm="ngForm" novalidate>
+
+            <extended-input [labelText]="'Some number'" [errorMessage]="formErrors.someNumber">
+                <input class="form-control" formControlName="someNumber">
+            </extended-input>
+        </form>
+    </div>
+</div>

@@ -6,6 +6,8 @@ import {FormListRoutintg} from './form-list.routes'
 
 import { FormListComponent } from './form-list.component';
 
+import { PowerfulFormComponent } from './powerful-form/powerful-form.component';
+import { ExtendedInputComponent } from './powerful-form/extended-input.component';
 import { PersonComponent } from './person/person.component';
 import { AddressComponent } from './customer/address.component';
 import { CustomerComponent } from './customer/customer.component';
@@ -25,7 +27,9 @@ import { FormControlService } from '../../services/form-control.service'
         PersonComponent,
         AddressComponent,
         CustomerComponent,
-        PaymentComponent
+        PaymentComponent,
+        ExtendedInputComponent,
+        PowerfulFormComponent
     ],
     providers: [FormControlService],
     exports: [FormListComponent],

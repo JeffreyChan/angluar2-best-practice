@@ -30,18 +30,18 @@
 
             <div class="margin-20">
                 <a (click)="addAddress()" style="cursor: default"> Add another address +</a>
-</div>
+            </div>
 
-<div class="margin-20">
-    <button type="submit" class="btn btn-primary pull-right" [disabled]="!customerForm.valid">Submit</button>
-</div>
-<div class="clearfix"></div>
+            <div class="margin-20">
+                <button type="submit" class="btn btn-primary pull-right" [disabled]="!customerForm.valid">Submit</button>
+            </div>
+            <div class="clearfix"></div>
 
-<div class="margin-20">
-    <div>myForm details:-</div>
-    <pre>Is myForm valid?: <br>{{customerForm.valid | json}}</pre>
-    <pre>form value: <br>{{customerForm.value | json}}</pre>
-</div>
-</form>
-</div>
+            <div class="margin-20">
+                <div>myForm details:-</div>
+                <pre>Is myForm valid?: <br>{{customerForm.valid | json}}</pre>
+                <pre>form value: <br>{{customerForm.value | json}}</pre>
+            </div>
+        </form>
+    </div>
 </div>

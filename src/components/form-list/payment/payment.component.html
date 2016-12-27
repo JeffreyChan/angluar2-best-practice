@@ -20,14 +20,12 @@
 
                 <div class="row">
                     <div class="col-xs-6">
-                        <button type="button" (click)="setPaymentMethodType(PAYMENT_METHOD_TYPE.BANK)" class="btn btn-block text-capitalize" [class.btn-default]="PaymentType !== PAYMENT_METHOD_TYPE.BANK"
-                            [class.btn-primary]="PaymentType === PAYMENT_METHOD_TYPE.BANK">
+                        <button type="button" (click)="setPaymentMethodType(PAYMENT_METHOD_TYPE.BANK)" class="btn btn-block text-capitalize" [class.btn-default]="PaymentType !== PAYMENT_METHOD_TYPE.BANK" [class.btn-primary]="PaymentType === PAYMENT_METHOD_TYPE.BANK">
                 {{ PAYMENT_METHOD_TYPE.BANK }}
               </button>
                     </div>
                     <div class="col-xs-6">
-                        <button type="button" (click)="setPaymentMethodType(PAYMENT_METHOD_TYPE.CARD)" class="btn btn-block text-capitalize" [class.btn-default]="PaymentType !== PAYMENT_METHOD_TYPE.CARD"
-                            [class.btn-primary]="PaymentType === PAYMENT_METHOD_TYPE.CARD">
+                        <button type="button" (click)="setPaymentMethodType(PAYMENT_METHOD_TYPE.CARD)" class="btn btn-block text-capitalize" [class.btn-default]="PaymentType !== PAYMENT_METHOD_TYPE.CARD" [class.btn-primary]="PaymentType === PAYMENT_METHOD_TYPE.CARD">
                 {{ PAYMENT_METHOD_TYPE.CARD }}
               </button>
                     </div>
