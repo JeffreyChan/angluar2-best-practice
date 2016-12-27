@@ -9,6 +9,7 @@ import { PersonComponent } from './person/person.component';
 import { CustomerComponent } from './customer/customer.component';
 import { PaymentComponent } from './payment/payment.component';
 import { TabHoldComponent } from './tabs/tabhold.component';
+import { RegistrationComponent } from './registration/registrationcomponent';
 
 
 const formListRoutest: Routes = [
@@ -17,6 +18,7 @@ const formListRoutest: Routes = [
         children: [
             { path: '', pathMatch: 'full', redirectTo: 'powerful-form' },
             { path: 'powerful-form', component: PowerfulFormComponent },
+            { path: 'reg-form', component: RegistrationComponent },
             { path: 'tabs', component: TabHoldComponent },
             { path: 'static-reactive', component: PersonComponent },
             { path: 'dynamic-reactive', component: CustomerComponent },

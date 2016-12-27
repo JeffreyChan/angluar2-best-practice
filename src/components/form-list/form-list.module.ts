@@ -15,9 +15,13 @@ import { PersonComponent } from './person/person.component';
 import { AddressComponent } from './customer/address.component';
 import { CustomerComponent } from './customer/customer.component';
 import { PaymentComponent } from './payment/payment.component';
+import { RegistrationComponent } from './registration/registrationcomponent';
 
 
 import { FormControlService } from '../../services/form-control.service'
+
+import { EmailValidator } from '../../directive/email-validator.directive';
+import { EqualValidator } from '../../directive/equal-validator.directive';
 
 @NgModule({
     imports: [
@@ -35,7 +39,10 @@ import { FormControlService } from '../../services/form-control.service'
         PowerfulFormComponent,
         TabComponent,
         TabsComponent,
-        TabHoldComponent
+        TabHoldComponent,
+        RegistrationComponent,
+        EmailValidator,
+        EqualValidator
     ],
     providers: [FormControlService],
     exports: [FormListComponent],
