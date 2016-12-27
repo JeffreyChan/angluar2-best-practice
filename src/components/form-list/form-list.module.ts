@@ -8,6 +8,9 @@ import { FormListComponent } from './form-list.component';
 
 import { PowerfulFormComponent } from './powerful-form/powerful-form.component';
 import { ExtendedInputComponent } from './powerful-form/extended-input.component';
+import { TabComponent } from './tabs/tab.component';
+import { TabsComponent } from './tabs/tabs.component';
+import { TabHoldComponent } from './tabs/tabhold.component';
 import { PersonComponent } from './person/person.component';
 import { AddressComponent } from './customer/address.component';
 import { CustomerComponent } from './customer/customer.component';
@@ -29,7 +32,10 @@ import { FormControlService } from '../../services/form-control.service'
         CustomerComponent,
         PaymentComponent,
         ExtendedInputComponent,
-        PowerfulFormComponent
+        PowerfulFormComponent,
+        TabComponent,
+        TabsComponent,
+        TabHoldComponent
     ],
     providers: [FormControlService],
     exports: [FormListComponent],
