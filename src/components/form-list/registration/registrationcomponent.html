@@ -1,0 +1,65 @@
+<div class="panel panel-default">
+    <div class="panel-heading clearfix">
+        <i class="icon-calendar"></i>
+        <h3 class="panel-title">Person Static Form Reactive</h3>
+    </div>
+    <div class="panel-body">
+        <form [formGroup]="regForm" (ngSubmit)="onSubmit()" class="form-horizontal well">
+            <div class="form-group">
+                <label for="name" class="col-md-2 control-label">Name</label>
+                <div class="col-md-10">
+                    <input type="text" id="name" class="form-control" formControlName="name">
+                    <div *ngIf="formErrors.name" class="alert alert-danger">
+                        {{ formErrors.name }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="name" class="col-md-2 control-label">Email Addres</label>
+                <div class="col-md-10">
+                    <input type="text" id="email" class="form-control" formControlName="email" validateEmail>
+                    <div *ngIf="formErrors.email" class="alert alert-danger">
+                        {{ formErrors.email }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password" class="col-md-2 control-label">Password</label>
+                <div class="col-md-10">
+                    <input type="password" class="form-control" name="password" formControlName="password">
+                    <div *ngIf="formErrors.password" class="alert alert-danger">
+                        {{ formErrors.password }}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword" class="col-md-2 control-label">Confirm Password</label>
+                <div class="col-md-10">
+                    <input type="password" class="form-control" name="confirmPassword" formControlName="confirmPassword">
+                    <div *ngIf="formErrors.confirmPassword" class="alert alert-danger">
+                        {{ formErrors.confirmPassword }}
+                    </div>
+
+                    <div *ngIf="formErrors.mismatchedPasswords" class="alert alert-danger">
+                        {{ formErrors.mismatchedPasswords }}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label"></label>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-default" [disabled]="!regForm.valid">Submit</button>
+                </div>
+            </div>
+
+            <div class="margin-20">
+                <div>myForm details:-</div>
+                <pre>form value: <br>{{regForm.errors | json}}</pre>
+                <pre>form value: <br>{{regForm.value | json}}</pre>
+            </div>
+        </form>
+    </div>
+
+</div>

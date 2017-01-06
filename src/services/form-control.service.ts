@@ -13,7 +13,7 @@ export class FormControlService {
 
         for (const field in fields) {
             const control = fg.get(field);
-
+            console.log(field);
             if (control && control.dirty && !control.valid) {
                 const messages = validationMessages[field];
                 for (const key in control.errors) {
