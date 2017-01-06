@@ -11,9 +11,9 @@ export class UserService {
 
     constructor(private http: Http) { }
 
-    getUsers(): Observable<User[]> {
-        return this.http.get(this.usersUrl)
-            .map(this.extractData)
+    getUsers(): Observable<any[]> {
+        return this.http.get('http://jsonplaceholder.typicode.com/users/')
+            .map((res: Response) => res.json())
             .catch(this.handleError);
     }
 

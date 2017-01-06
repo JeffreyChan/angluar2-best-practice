@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
 
     public userForm: FormGroup;
     errorMessage: string;
-    public users: User[];
+    public users: any[];
 
     constructor(private fb: FormBuilder, private _userService: UserService, private _formValidatorService: FormValidatorService) {
 
