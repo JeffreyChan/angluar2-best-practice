@@ -1,8 +1,4 @@
-﻿// Entry point for AoT compilation.
-export * from './polyfills';
-export * from './vendor';
-import './rxjs-operators';
-
+﻿
 import { platformBrowser } from '@angular/platform-browser';
 import { enableProdMode } from '@angular/core';
 import { AppModuleNgFactory } from '../aot/src/components/app/app.module.ngfactory';

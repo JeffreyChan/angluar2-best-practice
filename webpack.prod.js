@@ -7,18 +7,22 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
 var helpers = require('./webpack.helpers');
 
-console.log("@@@@@@@@@ USING PRODUCTION @@@@@@@@@@@@@@@");
+console.log('@@@@@@@@@ USING PRODUCTION @@@@@@@@@@@@@@@');
 
 module.exports = {
 
     entry: {
+        'vendor': './src/vendor.ts',
+        'polyfills': './src//polyfills.ts',
+        'rxjsoperators': './src/rxjs-operators.ts',
         'app': './src/bootstrap-aot.ts' // AoT compilation
     },
 
     output: {
-        path: "./wwwroot/",
+        path: './wwwroot/',
         filename: 'dist/[name].[hash].bundle.js',
-        publicPath: "/"
+        chunkFilename: 'dist/[id].[hash].chunk.js',
+        publicPath: '/'
     },
 
     resolve: {
@@ -32,27 +36,29 @@ module.exports = {
     },
 
     module: {
-        rules: [
-            {
+        rules: [{
                 test: /\.ts$/,
                 loaders: [
-                    'awesome-typescript-loader'
+                    'awesome-typescript-loader',
+                    'angular-router-loader?aot=true&genDir=aot/'
                 ]
             },
             {
-                test: /\.(png|jpg|gif|ico|woff|woff2|ttf|svg|eot)$/,
-                exclude: /node_modules/,
-                loader: "file-loader?name=assets/[name]-[hash:6].[ext]",
+                test: /\.(png|jpg|gif|woff|woff2|ttf|svg|eot)$/,
+                loader: 'file-loader?name=assets/[name]-[hash:6].[ext]'
+            },
+            {
+                test: /favicon.ico$/,
+                loader: 'file-loader?name=/[name].[ext]'
             },
             {
                 test: /\.css$/,
-                exclude: /node_modules/,
-                loader: "style-loader!css-loader"
+                loader: 'style-loader!css-loader'
             },
             {
                 test: /\.scss$/,
                 exclude: /node_modules/,
-                loaders: ["style-loader", "css-loader", "sass-loader"]
+                loaders: ['style-loader', 'css-loader', 'sass-loader']
             },
             {
                 test: /\.html$/,
@@ -69,7 +75,7 @@ module.exports = {
                 './wwwroot/assets'
             ]
         ),
-        new webpack.NoErrorsPlugin(),
+        new webpack.NoEmitOnErrorsPlugin(),
         new webpack.optimize.UglifyJsPlugin({
             compress: {
                 warnings: false
@@ -79,15 +85,13 @@ module.exports = {
             },
             sourceMap: false
         }),
-        new webpack.optimize.CommonsChunkPlugin(
-        {
-            name: ['vendor']
+        new webpack.optimize.CommonsChunkPlugin({
+            name: ['vendor', 'polyfills', 'rxjsoperators']
         }),
 
         new HtmlWebpackPlugin({
             filename: 'index.html',
             inject: 'body',
-            chunksSortMode: helpers.packageSort(['vendor', 'app']),
             template: './src/index.html'
         }),
 
@@ -96,4 +100,3 @@ module.exports = {
         ])
     ]
 };
-

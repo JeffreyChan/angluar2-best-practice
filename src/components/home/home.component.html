@@ -35,15 +35,15 @@
             <label for="name">Name</label>
 
             <input #txtUserName type="text" id="userName" class="form-control" formControlName="userName">
-            <em *ngIf="userForm.controls.userName.hasError('required')">Required</em>
-            <em *ngIf="userForm.controls.userName.hasError('usernameTaken')">user name exists</em>
+            <!-- <em *ngIf="userForm.controls.userName.hasError('required')">Required</em>
+            <em *ngIf="userForm.controls.userName.hasError('usernameTaken')">user name exists</em>-->
 
         </div>
 
         <button type="submit" class="btn btn-primary pull-right" [disabled]="!userForm.valid">Submit</button>
 
         <p class="error" *ngIf="errorMessage">{{errorMessage}}</p>
-        <pre>{{userForm.controls.userName.errors | json}}</pre>
+        <!--  <pre>{{userForm.controls.userName.errors | json}}</pre>-->
         <pre>{{ txtUserName.value | json}}</pre>
         <pre>{{ theForm.value | json}}</pre>
     </form>

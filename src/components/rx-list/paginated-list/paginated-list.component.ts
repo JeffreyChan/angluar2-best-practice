@@ -28,9 +28,9 @@ export class PaginatedListComponent implements OnInit {
 
     errorMessage: string;
 
-    private pageIndex: number = 1;
+    pageIndex: number = 1;
     private searchTerms: string = "";
-    private pageSize: number = this.pageSizeList[0];
+    pageSize: number = this.pageSizeList[0];
     totalSize: number;
 
     private searchTermStream = new Subject<string>();
