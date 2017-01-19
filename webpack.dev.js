@@ -32,6 +32,7 @@ module.exports = {
     devServer: {
         historyApiFallback: true,
         stats: 'minimal',
+        open: true,
         outputPath: path.join(__dirname, 'wwwroot/')
     },
 
