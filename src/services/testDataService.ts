@@ -28,7 +28,7 @@ export class TestDataService {
     }
 
     public Add = (itemName: string): Observable<Response> => {
-        var toAdd = JSON.stringify({ ItemName: itemName });
+        let toAdd = JSON.stringify({ ItemName: itemName });
 
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers }).map(res => res.json());
     }

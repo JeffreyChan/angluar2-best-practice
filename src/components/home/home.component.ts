@@ -46,7 +46,7 @@ export class HomeComponent implements OnInit {
         this._userService.addUser(this.userForm.value.userName)
             .subscribe(
             hero => {
-                this.users.push(hero)
+                this.users.push(hero);
                 this.userForm.reset();
             },
             error => this.errorMessage = <any>error);

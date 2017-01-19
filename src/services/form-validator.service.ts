@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ReflectiveInjector } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-import { UserService } from "./user.service";
+import { UserService } from './user.service';
 
 
 import { User } from '../model/user.model';
@@ -30,8 +30,7 @@ export class FormValidatorService {
                     if (Object.keys(data).length === 0) {
                         obs.next(null);
                         obs.complete();
-                    }
-                    else {
+                    } else {
                         obs.next({ ['usernameTaken']: true });
                         obs.complete();
                     }

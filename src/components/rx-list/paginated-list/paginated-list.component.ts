@@ -1,13 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-
 import { Observable, BehaviorSubject } from 'rxjs/Rx';
-import { Subject } from 'rxjs/Subject'
-
+import { Subject } from 'rxjs/Subject';
 import { User } from '../../../model/user.model';
-
-import { UserService } from '../../../services/user.service'
-
+import { UserService } from '../../../services/user.service';
 import * as _ from 'lodash';
 
 
@@ -29,21 +25,18 @@ export class PaginatedListComponent implements OnInit {
     errorMessage: string;
 
     pageIndex: number = 1;
-    private searchTerms: string = "";
+    private searchTerms: string = '';
     pageSize: number = this.pageSizeList[0];
     totalSize: number;
 
     private searchTermStream = new Subject<string>();
     private pageIndexStream = new Subject<number>();
-
-
     private searchSouceStream = new Subject<{ q: string, per_page: number }>();
-
-
     private pageSizelStream = new Subject<number>();
 
-    totalCount$: Observable<number>;
-    gitRepList$: Observable<any[]>;
+    public totalCount$: Observable<number>;
+    public gitRepList$: Observable<any[]>;
+    public isLoading: boolean;
 
     constructor(private fb: FormBuilder, private _userService: UserService) {
     }
@@ -52,7 +45,6 @@ export class PaginatedListComponent implements OnInit {
         this.buildForm();
     }
 
-    isLoading: boolean;
     buildForm(): void {
 
         this.gitForm = this.fb.group({
@@ -109,13 +101,12 @@ export class PaginatedListComponent implements OnInit {
                 .catch((errMsg: string) => {
                     return Observable.of({ items: [], total_count: 0, error: errMsg });
                 });
-        }
-        else {
+        } else {
             return Observable.of({ items: [], total_count: 0 });
         }
     }
 
     pageHandler(page: number) {
-        this.pageIndexStream.next(page)
+        this.pageIndexStream.next(page);
     }
 }

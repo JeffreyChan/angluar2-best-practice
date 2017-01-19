@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, Validators, FormControl } from '@angular/forms';
-
 import { Payment, CardInfo, BankInfo } from '../../../model/payment.model';
 
 /*import './customer.component.scss';*/
 
-import { FormControlService } from '../../../services/form-control.service'
+import { FormControlService } from '../../../services/form-control.service';
 
 @Component({
     selector: 'payment-component',
@@ -22,6 +21,41 @@ export class PaymentComponent implements OnInit {
     };
 
     public PaymentType: string;
+
+    public formErrors: any = {
+        'name': ''
+    };
+
+    public bankInfoErrors: any = {};
+
+    public cardInfoErrors: any = {};
+
+    public validationMessages: any = {
+        'name': {
+            'required': 'Name is required.',
+            'minlength': 'Name must be at least 5 characters long.'
+        },
+        'accountNo': {
+            'required': 'AccountNo is required.',
+        },
+        'accountHolder': {
+            'required': 'AccountHolder is required.',
+        },
+        'routingNo': {
+            'required': 'RoutingNo is required.',
+        },
+        cardNo: {
+            'required': 'CardNo is required.',
+            'pattern': 'Must be valid card number.'
+        },
+        cardHolder: {
+            'required': 'CardHolder is required.'
+        },
+        expiry: {
+            'required': 'CardNo is required.',
+            'pattern': 'Must be in format MM/YY'
+        },
+    };
 
     constructor(private _fb: FormBuilder, private _formService: FormControlService) {
     }
@@ -44,7 +78,7 @@ export class PaymentComponent implements OnInit {
             .subscribe(data => this.onValueChanged(data));
 
         const paymentGroup = this.paymentForm.get('paymentMethod') as FormGroup;
-        var ctrlPaymenType = paymentGroup.get('paymentType') as FormControl;
+        const ctrlPaymenType = paymentGroup.get('paymentType') as FormControl;
 
         ctrlPaymenType.valueChanges
             .subscribe(paymentType => this.subscribePaymentTypeChanges(paymentType));
@@ -67,8 +101,7 @@ export class PaymentComponent implements OnInit {
                 cardInfoGroup.controls[key].setValidators(null);
                 cardInfoGroup.controls[key].updateValueAndValidity();
             });
-        }
-        else {
+        } else {
             Object.keys(bankInfoGroup.controls).forEach(key => {
                 bankInfoGroup.controls[key].setValidators(null);
                 bankInfoGroup.controls[key].updateValueAndValidity();
@@ -82,14 +115,13 @@ export class PaymentComponent implements OnInit {
     }
 
     onValueChanged(data?: any) {
-        if (!this.paymentForm) return;
-
+        if (!this.paymentForm) {
+            return;
+        }
         // handle main form errors
         this.onFormValueChanged();
-
         // handle bank errors
         this.onBankGroupValueChanged();
-
         // handle card errors
         this.onCardGroupValueChanged();
     }
@@ -176,45 +208,10 @@ export class PaymentComponent implements OnInit {
 
     setPaymentMethodType(type: string) {
         // update payment method type value
-        var payMethodGroup = this.paymentForm.get('paymentMethod') as FormGroup;
+        const payMethodGroup = this.paymentForm.get('paymentMethod') as FormGroup;
         const ctrl: FormControl = payMethodGroup.get('paymentType') as FormControl;
         ctrl.setValue(type);
 
         this.PaymentType = type;
     }
-
-    formErrors: any = {
-        'name': ''
-    };
-
-    bankInfoErrors: any = {};
-
-    cardInfoErrors: any = {};
-
-    validationMessages: any = {
-        'name': {
-            'required': 'Name is required.',
-            'minlength': 'Name must be at least 5 characters long.'
-        },
-        'accountNo': {
-            'required': 'AccountNo is required.',
-        },
-        'accountHolder': {
-            'required': 'AccountHolder is required.',
-        },
-        'routingNo': {
-            'required': 'RoutingNo is required.',
-        },
-        cardNo: {
-            'required': 'CardNo is required.',
-            'pattern': 'Must be valid card number.'
-        },
-        cardHolder: {
-            'required': 'CardHolder is required.'
-        },
-        expiry: {
-            'required': 'CardNo is required.',
-            'pattern': 'Must be in format MM/YY'
-        },
-    };
 }

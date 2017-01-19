@@ -3,8 +3,7 @@ import { FormGroup, FormArray, FormBuilder, Validators, AbstractControl } from '
 import { Customer } from '../../../model/customer.model';
 
 /*import './customer.component.scss';*/
-
-import { FormControlService } from '../../../services/form-control.service'
+import { FormControlService } from '../../../services/form-control.service';
 
 @Component({
     selector: 'customer-component',
@@ -13,7 +12,23 @@ import { FormControlService } from '../../../services/form-control.service'
 export class CustomerComponent implements OnInit {
     public customerForm: FormGroup;
 
-    public addressesFormArray:FormArray;
+    public addressesFormArray: FormArray;
+
+    public formErrors: any = {
+        'name': ''
+    };
+
+    public addressErrors: any = {};
+
+    public validationMessages: any = {
+        'name': {
+            'required': 'Name is required.',
+            'minlength': 'Name must be at least 4 characters long.'
+        },
+        'street': {
+            'required': 'Street is required.',
+        }
+    };
     constructor(private _fb: FormBuilder, private _formService: FormControlService) { }
 
     initAddress() {
@@ -26,9 +41,7 @@ export class CustomerComponent implements OnInit {
     addAddress() {
         const control = this.customerForm.get('addresses') as FormArray;
         const addrCtrl = this.initAddress();
-
         control.push(addrCtrl);
-
     }
 
     removeAddress(i: number) {
@@ -50,13 +63,10 @@ export class CustomerComponent implements OnInit {
             'name': ['', [Validators.required, Validators.minLength(5)]],
             'addresses': this._fb.array([])
         });
-
         // add address
         this.addAddress();
-
         this.customerForm.valueChanges
             .subscribe(data => this.onValueChanged(data));
-
         /* // HACK: trigger value changes immediately
          this.customerForm.setValue({
              name: '',
@@ -67,20 +77,18 @@ export class CustomerComponent implements OnInit {
     }
 
     onValueChanged(data?: any) {
-        if (!this.customerForm) return;
-
+        if (!this.customerForm) {
+            return;
+        }
         // handle main form errors
         this.onFormValueChanged();
-
         // handle addresses errors
         this.onAddrsValueChanged();
     }
 
     /* Update Main Form Validations */
     onFormValueChanged() {
-
         const custF = this.customerForm;
-
         // setup fields to validate and the messages
         const fields = { name: '' };
 
@@ -91,10 +99,8 @@ export class CustomerComponent implements OnInit {
     /* Update Addresses Validation */
     onAddrsValueChanged() {
         const addrsF = this.customerForm.get('addresses') as FormArray;
-
         // setup fields to validate and the messages
         const fields = { street: '' };
-
         addrsF.controls.forEach((val, idx) => {
             const refErrors = this._formService.handleValidations(fields,
                 this.validationMessages,
@@ -103,20 +109,4 @@ export class CustomerComponent implements OnInit {
             this.addressErrors = Object.assign(this.addressErrors, { [idx]: refErrors });
         });
     }
-
-    formErrors: any = {
-        'name': ''
-    };
-
-    addressErrors: any = {};
-
-    validationMessages: any = {
-        'name': {
-            'required': 'Name is required.',
-            'minlength': 'Name must be at least 4 characters long.'
-        },
-        'street': {
-            'required': 'Street is required.',
-        }
-    };
 }

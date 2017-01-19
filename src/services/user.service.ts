@@ -18,14 +18,14 @@ export class UserService {
     }
 
     getGitHubRepositories(params: any): Observable<any> {
-        var githubAPI = `https://api.github.com/search/repositories?${this.toParamsString(params)}`;
+        const githubAPI = `https://api.github.com/search/repositories?${this.toParamsString(params)}`;
         return this.http.get(githubAPI)
             .map((res: Response) => res.json())
             .catch(this.handleError);
     }
 
     getGitHubUsers(randomOffset: number): Observable<any> {
-        var githubUserApiUrl = `https://api.github.com/users?since=${randomOffset}`;
+        const githubUserApiUrl = `https://api.github.com/users?since=${randomOffset}`;
         return this.http.get(githubUserApiUrl)
             .map((res: Response) => res.json())
             .catch(this.handleError);

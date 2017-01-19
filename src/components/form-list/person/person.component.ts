@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-
 import { Person } from '../../../model/person.model';
-
-import { FormControlService } from '../../../services/form-control.service'
+import { FormControlService } from '../../../services/form-control.service';
 
 @Component({
     selector: 'person-component',
@@ -21,7 +18,7 @@ export class PersonComponent implements OnInit {
         { value: 'admin', display: 'Administrator' },
         { value: 'guest', display: 'Guest' },
         { value: 'custom', display: 'Custom' }
-    ]
+    ];
 
     public themes = [
         { backgroundColor: 'black', fontColor: 'white', display: 'Dark' },
@@ -46,7 +43,23 @@ export class PersonComponent implements OnInit {
 
     public person: Person = new Person(0, '', '', 0);
 
-    submitted = false;
+    public submitted = false;
+
+     public formErrors: any = {};
+
+    public validationMessages: any = {
+        'name': {
+            'required': 'Name is required.',
+            'minlength': 'Name must be at least 4 characters long.',
+            'maxlength': 'Name cannot be more than 24 characters long.',
+        },
+        'email': {
+            'required': 'Email Address is required.'
+        },
+        'age': {
+            'required': 'Age is required.'
+        }
+    };
 
     constructor(private fb: FormBuilder, private _formService: FormControlService) {
 
@@ -79,22 +92,19 @@ export class PersonComponent implements OnInit {
         });
 
         this.txtToggle = this.personForm.get('toggle') as FormControl;
-
         this.personForm.valueChanges
             .subscribe(data => this.onValueChanged(data));
     }
 
-    onValueChanged(data?: any) {
+    private onValueChanged(data?: any) {
         if (!this.person) { return; }
         // handle main form errors
         this.onFormValueChanged();
     }
 
     /* Update Main Form Validations */
-    onFormValueChanged() {
-
+    private onFormValueChanged() {
         const personF = this.personForm;
-
         // setup fields to validate and the messages
         const fields = {
             'name': '',
@@ -105,20 +115,4 @@ export class PersonComponent implements OnInit {
         const refErrors = this._formService.handleValidations(fields, this.validationMessages, personF);
         this.formErrors = Object.assign(this.formErrors, refErrors);
     }
-
-    formErrors: any = {};
-
-    validationMessages: any = {
-        'name': {
-            'required': 'Name is required.',
-            'minlength': 'Name must be at least 4 characters long.',
-            'maxlength': 'Name cannot be more than 24 characters long.',
-        },
-        'email': {
-            'required': 'Email Address is required.'
-        },
-        'age': {
-            'required': 'Age is required.'
-        }
-    };
 }

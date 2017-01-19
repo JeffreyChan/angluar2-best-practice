@@ -8,9 +8,10 @@ import { Validator, AbstractControl, NG_VALIDATORS } from '@angular/forms';
     ]
 })
 export class EmailValidator implements Validator {
+
     emailRegexp = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
-    
-    constructor(){
+
+    constructor() {
 
     }
 

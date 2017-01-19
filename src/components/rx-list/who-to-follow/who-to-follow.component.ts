@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-
 import { User } from '../../../model/user.model';
-
 import { Observable, Subject } from 'rxjs/Rx';
-
-import { UserService } from '../../../services/user.service'
+import { UserService } from '../../../services/user.service';
 
 
 @Component({
@@ -31,7 +28,7 @@ export class WhoToFollowComponent implements OnInit {
 
     ngOnInit(): void {
 
-        var responseStream: Observable<any[]> = this.refreshClickStream
+        const responseStream: Observable<any[]> = this.refreshClickStream
             .startWith(this.getRandomOffset())
             .flatMap((params: any) => this._userService.getGitHubUsers(params.since));
 
@@ -55,17 +52,17 @@ export class WhoToFollowComponent implements OnInit {
 
         suggestionStream1.subscribe((user: any) => {
             console.log(`user 1 load: ${user}`);
-            this.userList[0] = user
+            this.userList[0] = user;
         });
 
         suggestionStream2.subscribe((user: any) => {
             console.log(`user 2 load: ${user}`);
-            this.userList[1] = user
+            this.userList[1] = user;
         });
 
         suggestionStream3.subscribe((user: any) => {
             console.log(`user 3 load: ${user}`);
-            this.userList[2] = user
+            this.userList[2] = user;
         });
 
     }

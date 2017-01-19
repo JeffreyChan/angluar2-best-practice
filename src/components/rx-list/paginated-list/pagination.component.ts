@@ -1,8 +1,7 @@
-import * as _ from 'lodash'
-import { Component, Input, EventEmitter, Output } from '@angular/core'
+import * as _ from 'lodash';
+import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { Location } from '@angular/common'
-
+import { Location } from '@angular/common';
 import { Observable, BehaviorSubject } from 'rxjs/Rx';
 
 @Component({
@@ -15,7 +14,7 @@ export class PaginationComponent {
 
     totalPage: number = 0;
     @Input()
-    params: { [key: string]: string | number } = {}
+    params: { [key: string]: string | number } = {};
 
     @Input()
     size: number = 10;
@@ -24,15 +23,15 @@ export class PaginationComponent {
     total: number = 0;
 
     @Input()
-    page: number = 1
+    page: number = 1;
 
     @Output()
-    pageClickEvt: EventEmitter<number> = new EventEmitter<number>()
+    pageClickEvt: EventEmitter<number> = new EventEmitter<number>();
 
     constructor() { }
 
     totalPages() {
-        return Math.ceil(this.total / this.size)
+        return Math.ceil(this.total / this.size);
     }
 
     rangeStart() {
@@ -44,15 +43,15 @@ export class PaginationComponent {
     }
 
     pagesRange() {
-        return _.range(this.rangeStart(), Math.min(this.rangeStart() + 10, this.totalPages() + 1))
+        return _.range(this.rangeStart(), Math.min(this.rangeStart() + 10, this.totalPages() + 1));
     }
 
     prevPage() {
-        return Math.max(this.rangeStart(), this.page - 1)
+        return Math.max(this.rangeStart(), this.page - 1);
     }
 
     nextPage() {
-        return Math.min(this.page + 1, this.totalPages())
+        return Math.min(this.page + 1, this.totalPages());
     }
 
     pageClicked(page: number) {

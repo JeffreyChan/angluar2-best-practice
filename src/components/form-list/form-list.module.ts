@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import {FormListRoutintg} from './form-list.routes'
+import {FormListRoutintg} from './form-list.routes';
 
 import { FormListComponent } from './form-list.component';
 
@@ -18,7 +18,7 @@ import { PaymentComponent } from './payment/payment.component';
 import { RegistrationComponent } from './registration/registrationcomponent';
 
 
-import { FormControlService } from '../../services/form-control.service'
+import { FormControlService } from '../../services/form-control.service';
 
 import { EmailValidator } from '../../directive/email-validator.directive';
 import { EqualValidator } from '../../directive/equal-validator.directive';
