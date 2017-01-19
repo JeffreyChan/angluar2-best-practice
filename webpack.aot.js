@@ -1,27 +1,28 @@
-var path = require('path');
+const path = require('path');
 
-var webpack = require('webpack');
+const webpack = require('webpack');
 
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var CopyWebpackPlugin = require('copy-webpack-plugin');
-var CleanWebpackPlugin = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const helpers = require('./webpack.helpers');
+const ngToolsWebpack = require('@ngtools/webpack');
 
-console.log("@@@@@@@@@ USING DEVELOPMENT @@@@@@@@@@@@@@@");
+console.log('@@@@@@@@@ USING PRODUCTION AOT @@@@@@@@@@@@@@@');
 
 module.exports = {
 
-    devtool: 'source-map',
-    performance: {
-        hints: false
-    },
     entry: {
-        'app': './src/bootstrap.ts' // JiT compilation
+        'vendor': './src/vendor.ts',
+        'polyfills': './src//polyfills.ts',
+        'rxjsoperators': './src/rxjs-operators.ts',
+        'app': './src/bootstrap-aot.ts' // AoT compilation
     },
 
     output: {
         path: './wwwroot/',
-        filename: 'dist/[name].bundle.js',
-        chunkFilename: 'dist/[id].chunk.js',
+        filename: 'dist/[name].[hash].bundle.js',
+        chunkFilename: 'dist/[id].[hash].chunk.js',
         publicPath: '/'
     },
 
@@ -35,16 +36,11 @@ module.exports = {
         outputPath: path.join(__dirname, 'wwwroot/')
     },
 
-
     module: {
         rules: [{
                 test: /\.ts$/,
                 loaders: [
-                    'awesome-typescript-loader',
-                    'angular-router-loader',
-                    'angular2-template-loader',
-                    'source-map-loader',
-                    'tslint-loader'
+                    '@ngtools/webpack'
                 ]
             },
             {
@@ -73,14 +69,29 @@ module.exports = {
     },
 
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin({ name: ['app', 'polyfills'] }),
-
+        new ngToolsWebpack.AotPlugin({
+            tsConfigPath: './tsconfig-aot.json',
+            entryModule: __dirname + '/src/components/app/app.module#AppModule'
+        }),
         new CleanWebpackPlugin(
             [
                 './wwwroot/dist',
                 './wwwroot/assets'
             ]
         ),
+        new webpack.NoEmitOnErrorsPlugin(),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            },
+            output: {
+                comments: false
+            },
+            sourceMap: false
+        }),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: ['vendor', 'polyfills', 'rxjsoperators']
+        }),
 
         new HtmlWebpackPlugin({
             filename: 'index.html',
@@ -92,5 +103,4 @@ module.exports = {
             { from: './static/images/*.*', to: "assets/", flatten: true }
         ])
     ]
-
 };
